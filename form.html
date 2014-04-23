@@ -1,40 +1,58 @@
 <!DOCTYPE html>
 <html lang="ja">
-  <head>
-    <title>フォーム</title>
-    <meta charset="utf-8">
+<head>
+  <title>フォーム</title>
+  <meta charset="utf-8">
 </head>
 
-  <body>
-    <h1>フォーム>入力</h1>
+<body>
+  <h1>フォーム>入力</h1>
+
+  <form> 
     <fieldset name="form">
-    <legend>フォーム</legend>
-    <form> 
-      <p><label>姓：<input type="text" name="first_name" size="20"></label><label>名：<input type="text" name="last_name" size="20"></label></p>
-      <p><label>性別：
-      <ul>
-      <li><input type="radio" name="sex" value="male">男性</label></li>
-      <li><input type="radio" name="sex" value="female">女性</label></li>
-  </ul> 
+      <legend>フォーム</legend>
+  
+      <p>
+        <label>姓：</label><input type="text" name="first_name" size="20"><label>名：</label><input type="text" name="last_name" size="20">
       </p>
-    <p><label>郵便番号：<input type="text" name="postalcode" size="10" maxlength="3">-<input type="text" name="postalcode" size="10"  maxlength="4"></label></p>
-    <p><label>都道府県：
-    <select id="adress" name="adress" size="1">
-        <option value="none" selected>--</option>
-        <option value="tokyo">東京都</option>
-        <option value="osaka">大阪府</option>
-        <option value="ngt">新潟県</option>
-        <option value="fkok">福岡県</option>
-    </select></label></p>
-      <p><label>メールアドレス：<input type="email" name="email" size="30" maxlength="40"></label></p>
-      <p><label>趣味はなんですか：<input type="checkbox" name="hobby" value="1">音楽鑑賞
+
+      <p>
+        <label>性別：</label>
+        <ul>
+          <li><input type="radio" name="sex" value="male">男性</li>
+          <li><input type="radio" name="sex" value="female">女性</li>
+        </ul> 
+      </p>
+
+      <p><label>郵便番号：</label><input type="text" name="postalcode" size="10" maxlength="3">-<input type="text" name="postalcode" size="10"  maxlength="4"></p>
+
+      <p>
+        <label>都道府県：</label>
+        <select id="adress" name="adress" size="1">
+          <option value="none" selected>--</option>
+          <option value="tokyo">東京都</option>
+          <option value="osaka">大阪府</option>
+          <option value="ngt">新潟県</option>
+          <option value="fkok">福岡県</option>
+        </select>
+      </p>
+
+      <p><label>メールアドレス：</label><input type="email" name="email" size="30" maxlength="40"></p>
+
+      <p>
+        <label>趣味はなんですか：</label>
+        <input type="checkbox" name="hobby" value="1">音楽鑑賞
         <input type="checkbox" name="hobby" value="2">映画鑑賞
-        <input type="checkbox" name="hobby" value="3">その他<input type="text" name="hobby" size="10" maxlength="15"</label></p>
-      <p><label>ご意見：<textarea name="comment" cols="20" rows="2" maxlength="40"></textarea></label></p>
+        <input type="checkbox" name="hobby" value="3">その他
+        <input type="text" name="hobby" size="10" maxlength="15">
+      </p>
+
+      <p><label>ご意見：</label><textarea name="comment" cols="20" rows="2" maxlength="40"></textarea></p>
+
       <p><input type="submit" value="確認" formaction="confirm.html"></p>
-    </form>
-  </fieldset>
+    </fieldset>
+  </form>
+
   <p>Copyright 2014</p>
 </body>
-
 </html>

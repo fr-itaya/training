@@ -1,38 +1,5 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <title>フォーム</title>
-  <meta charset="utf-8">
-  <link href="style.css" rel="stylesheet" type="text/css" media="all">
-</head>
-
-<body>
 <?php
-print'  <header>';
-print'    <h1>フォーム>入力</h1>';
-print'  </header>';
 
-print'  <section>';
-print'    <form action="confirm.php" method="post">';
-print'      <fieldset name="form">';
-print'        <legend>フォーム</legend>';
-  
-print'        <p>';
-print'          <label>姓：</label><input type="text" name="first_name" size="20"><label>名：</label><input type="text" name="last_name" size="20">';
-print'        </p>';
-
-print'        <p>';
-print'          <label>性別：</label>';
-print'          <ul>';
-print'            <li><input type="radio" name="sex" value="男性"/>男性</li>';
-print'            <li><input type="radio" name="sex" value="女性"/>女性</li>';
-print'          </ul> ';
-print'        </p>';
-
-print'        <p><label>郵便番号：</label><input type="text" name="postalcode[zone]" size="10" maxlength="3">-<input type="text" name="postalcode[district]" size="10"  maxlength="4"></p>';
-
-print'        <p>';
-print'          <label>都道府県：</label>';
 function GetSelectBoxTag($prefecture_array, $prefecture_name, $prefecture_sel_value = '') {
     $menu_tag = '';
 
@@ -66,31 +33,64 @@ $sel_value = 13; //東京都のこと
 //セレクトボックス作成関数呼び出し
 $menu_tag = GetSelectBoxTag($menu_array, $menu_name, $sel_value);
 
-//出力
-echo $menu_tag;
-
-print'        </p>';
-
-print'        <p><label>メールアドレス：</label><input type="email" name="email" size="30" maxlength="40"></p>';
-
-print'        <p>';
-print'          <label>趣味はなんですか：</label>';
-print'          <input type="checkbox" name="hobby[]" value="音楽鑑賞">音楽鑑賞';
-print'          <input type="checkbox" name="hobby[]" value="映画鑑賞">映画鑑賞';
-print'          <input type="checkbox" name="hobby[]" value="その他">その他';
-print'          <input type="text" name="hobby[]" size="10" maxlength="15">';
-print'        </p>';
-
-print'        <p><label>ご意見：</label><textarea name="comment" cols="20" rows="2" maxlength="40"></textarea></p>
-';
-print'        <p><input type="submit" value="確認" formaction="confirm.php"></p>';
-print'      </fieldset>';
-print'    </form>';
-print'  </section>';
-
-print'  <footer>';
-print'    <p>&copy; 2014</p>';
-print'  </footer>';
 ?>
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <title>フォーム</title>
+  <meta charset="utf-8">
+  <link href="style.css" rel="stylesheet" type="text/css" media="all">
+</head>
+
+<body>
+  <header>
+    <h1>フォーム>入力</h1>
+  </header>
+
+  <section>
+    <form action="confirm.php" method="post">
+      <fieldset name="form">
+        <legend>フォーム</legend>
+  
+        <p>
+          <label>姓：</label><input type="text" name="first_name" size="20"><label>名：</label><input type="text" name="last_name" size="20">
+        </p>
+
+        <p>
+          <label>性別：</label>
+          <ul>
+            <li><input type="radio" name="sex" value="男性"/>男性</li>
+            <li><input type="radio" name="sex" value="女性"/>女性</li>
+          </ul>
+        </p>
+
+        <p><label>郵便番号：</label><input type="text" name="postalcode[zone]" size="10" maxlength="3">-<input type="text" name="postalcode[district]" size="10" maxlength="4"></p>
+
+        <p>
+          <label>都道府県：</label>
+          <?php echo $menu_tag; ?>
+        </p>
+
+        <p><label>メールアドレス：</label><input type="email" name="email" size="30" maxlength="40"></p>
+
+        <p>
+          <label>趣味はなんですか：</label>
+          <input type="checkbox" name="hobby[]" value="音楽鑑賞">音楽鑑賞
+          <input type="checkbox" name="hobby[]" value="映画鑑賞">映画鑑賞
+          <input type="checkbox" name="hobby[]" value="その他">その他
+          <input type="text" name="hobby[]" size="10" maxlength="15">
+        </p>
+
+        <p><label>ご意見：</label><textarea name="comment" cols="20" rows="2" maxlength="40"></textarea></p>
+
+        <p><input type="submit" value="確認" formaction="confirm.php"></p>
+      </fieldset>
+    </form>
+  </section>
+
+   <footer>
+     <p>&copy; 2014</p>
+  </footer>
 </body>
 </html>

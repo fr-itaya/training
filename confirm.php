@@ -1,4 +1,12 @@
 <?php
+//空白処理
+foreach($_POST as $value){
+    //半角スペースを除く
+    $value = trim($value);
+    //全角スペースを除く
+    $value = preg_replace('/^[\s ]*(.*?)[\s ]*$/u', '\1', $value);
+}
+
 $first_name=$_POST['first_name'];
 $last_name=$_POST['last_name'];
 $sex=$_POST['sex'];
@@ -9,12 +17,11 @@ $prefecture=$_POST['prefecture'];
 $email=$_POST['email'];
 $comment=$_POST['comment'];
 
-if(isset($_POST["hobby"])){
-    $hobby = implode(' ', $_POST["hobby"]);
+if(isset($_POST['hobby'])){
+    $hobby = implode(' ', $_POST['hobby']);
 }else{
     $hobby = 'なし';
 }
-
 
 $first_name      = htmlspecialchars($first_name);
 $last_name       = htmlspecialchars($last_name);
@@ -24,6 +31,7 @@ $prefecture      = htmlspecialchars($prefecture);
 $email           = htmlspecialchars($email);
 $comment         = htmlspecialchars($comment);
 $hobby           = htmlspecialchars($hobby);
+
 ?>
 
 <!DOCTYPE html>

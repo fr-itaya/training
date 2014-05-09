@@ -23,6 +23,43 @@ if(isset($_POST['hobby'])){
     $hobby = 'なし';
 }
 
+$errormsg = array();
+
+if(empty($first_name)){
+    $errormsg[] = '姓を入力してください。';
+}elseif(preg_match("/(?:\xEF\xBD[\xA1-\xBF]|\xEF\xBE[\x80-\x9F])|[\x20-\x7E]/", $first_name)){
+    $errormsg[] = '姓は全角で入力してください。';
+}elseif(mb_strlen($first_name, 'utf-8') > 50){
+    $errormsg[] = '姓は50文字以内で入力してください。';
+}else{print '姓は正しく入力されています。<br />';}
+
+if(empty($last_name)){
+    $errormsg[] = '名を入力してください。';
+}elseif(preg_match("/(?:\xEF\xBD[\xA1-\xBF]|\xEF\xBE[\x80-\x9F])|[\x20-\x7E]/", $first_name)){
+    $errormsg[] = '名は全角で入力してください。';
+}elseif(mb_strlen($last_name, 'utf-8') > 50){
+    $errormsg[] = '姓は50文字以内で入力してください。';
+}else{print '名は正しく入力されています。<br />';}
+/*
+if(empty($first_name)){
+    $errormsg[] = '姓を入力してください。';
+}elseif(preg_match("/(?:\xEF\xBD[\xA1-\xBF]|\xEF\xBE[\x80-\x9F])|[\x20-\x7E]/", $fn)){
+    $errormsg[] = '姓は全角で入力してください。';
+}elseif(mb_strlen($first_name, 'utf-8') > 50){
+    $errormsg[] = '姓は50文字以内で入力してください。';
+}else{print '正しく入力されています。';}*/
+
+
+
+
+
+
+$count_errormsg = count($errormsg);
+
+for ($i = 0; $i < $count_errormsg; $i++){
+    print "$errormsg[$i]<br />\n";
+}
+
 $first_name      = htmlspecialchars($first_name);
 $last_name       = htmlspecialchars($last_name);
 $sex             = htmlspecialchars($sex);

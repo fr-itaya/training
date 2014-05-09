@@ -40,16 +40,24 @@ if(empty($last_name)){
 }elseif(mb_strlen($last_name, 'utf-8') > 50){
     $errormsg[] = '姓は50文字以内で入力してください。';
 }else{print '名は正しく入力されています。<br />';}
-/*
-if(empty($first_name)){
-    $errormsg[] = '姓を入力してください。';
-}elseif(preg_match("/(?:\xEF\xBD[\xA1-\xBF]|\xEF\xBE[\x80-\x9F])|[\x20-\x7E]/", $fn)){
-    $errormsg[] = '姓は全角で入力してください。';
-}elseif(mb_strlen($first_name, 'utf-8') > 50){
-    $errormsg[] = '姓は50文字以内で入力してください。';
-}else{print '正しく入力されています。';}*/
 
+if(empty($sex)){
+    $errormsg[] = '性別を選択してください。';
+}else{print '性別は正しく選択されています。<br />';}
 
+if(empty($postalcode[(0|1)])){
+    $errormsg[] = '郵便番号を入力してください。';
+}else{print '郵便番号は正しく入力されています。<br />';}
+
+if(empty($prefecture)){
+    $errormsg[] = '都道府県を選択してください。';
+}else{print '都道府県は正しく選択されています。<br />';}
+
+if(empty($email)){
+    $errormsg[] = 'メールアドレスを入力してください。';
+}elseif(preg_match("/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/", $email)){
+    print 'メールアドレスは正しく入力されています。<br />';
+}else{$errormsg[] =  'メールアドレスを正しく入力してください。<br />';}
 
 
 

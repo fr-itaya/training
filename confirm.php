@@ -61,7 +61,7 @@ if(empty($email)){
     print 'メールアドレスは正しく入力されています。<br />';
 }else{$errormsg[] =  'メールアドレスを正しく入力してください。<br />';}
 
-if($_POST['hobby'] || "その他" && count($hobby) < 3){
+if($hobby[3] =="その他："  && empty($hobby[4])){
     $errormsg[] = 'その他の詳細を入力してください。<br />';
 }else{print 'その他の趣味の詳細が正しく入力されています。<br />';}
 
@@ -71,6 +71,7 @@ for ($i = 0; $i < $count_errormsg; $i++){
     print "$errormsg[$i]<br />\n";
 }
 
+#配列のkeyと値確認用
 print_r ($_POST['hobby']);
 print_r ($hobby);
 

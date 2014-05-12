@@ -76,10 +76,13 @@ $menu_tag = GetSelectBoxTag($menu_array, $menu_name, $sel_value);
 
         <p>
           <label>趣味はなんですか：</label>
-          <input type="checkbox" name="hobby[]" value="音楽鑑賞">音楽鑑賞
-          <input type="checkbox" name="hobby[]" value="映画鑑賞">映画鑑賞
-          <input type="checkbox" name="hobby[]" value="その他">その他
-          <input type="text" name="hobby[]" size="10" maxlength="15">
+          <input type="hidden" name="hobby[1]" value="">
+          <input type="checkbox" name="hobby[1]" value="音楽鑑賞">音楽鑑賞
+          <input type="hidden" name="hobby[2]" value="">
+          <input type="checkbox" name="hobby[2]" value="映画鑑賞">映画鑑賞
+          <input type="hidden" name="hobby[3]" value="">
+          <input type="checkbox" name="hobby[3]" value="その他：">その他
+          <input type="text" name="hobby[4]" size="10" maxlength="15">
         </p>
 
         <p><label>ご意見：</label><textarea name="comment" cols="20" rows="2" maxlength="40"></textarea></p>

@@ -17,10 +17,12 @@ $prefecture=$_POST['prefecture'];
 $email=$_POST['email'];
 $comment=$_POST['comment'];
 
-if(isset($_POST['hobby'])){
-    $hobby = implode(' ', $_POST['hobby']);
-}else{
-    $hobby = 'なし';
+# _POST['hobby']配列の中身をそのまま$hobby[]に格納したい！！
+# このあとの処理で、その他にチェックが入っているか、textboxに入力があるかを配列に値があるかどうかで判断したい
+#連想配列で格納してみる
+
+foreach ($_POST['hobby'] as $key => $value){
+    $hobby[$key] = $value;
 }
 
 $errormsg = array();
@@ -59,14 +61,18 @@ if(empty($email)){
     print 'メールアドレスは正しく入力されています。<br />';
 }else{$errormsg[] =  'メールアドレスを正しく入力してください。<br />';}
 
-
-
+if($_POST['hobby'] || "その他" && count($hobby) < 3){
+    $errormsg[] = 'その他の詳細を入力してください。<br />';
+}else{print 'その他の趣味の詳細が正しく入力されています。<br />';}
 
 $count_errormsg = count($errormsg);
 
 for ($i = 0; $i < $count_errormsg; $i++){
     print "$errormsg[$i]<br />\n";
 }
+
+print_r ($_POST['hobby']);
+print_r ($hobby);
 
 $first_name      = htmlspecialchars($first_name);
 $last_name       = htmlspecialchars($last_name);
@@ -141,7 +147,7 @@ $hobby           = htmlspecialchars($hobby);
         <tr>
           <th>趣味</th>
           <td>
-          <?php print $hobby; ?>
+          <?php print $hobby; #ここに配列hobbyの中身を半角スペースかカンマ区切りで1列に表示したい! ?> 
           </td>
         </tr>
 

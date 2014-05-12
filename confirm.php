@@ -75,7 +75,7 @@ for ($i = 0; $i < $count_errormsg; $i++){
 print_r ($_POST['hobby']);
 print_r ($hobby);
 
-$hobby_view = implode(' ', $hobby);
+$hobby_view = implode(' ', array_slice($hobby, 0, 3)).'('.$hobby[4].')';
 
 $first_name      = htmlspecialchars($first_name);
 $last_name       = htmlspecialchars($last_name);
@@ -150,7 +150,7 @@ $hobby_view      = htmlspecialchars($hobby_view);
         <tr>
           <th>趣味</th>
           <td>
-          <?php print $hobby_view; #ここに配列hobbyの中身を半角スペースかカンマ区切りで1列に表示したい! ?> 
+          <?php print $hobby_view; ?> 
           </td>
         </tr>
 

@@ -74,6 +74,8 @@ for ($i = 0; $i < $count_errormsg; $i++){
 print_r ($_POST['hobby']);
 print_r ($hobby);
 
+$hobby_view = implode(' ', $hobby);
+
 $first_name      = htmlspecialchars($first_name);
 $last_name       = htmlspecialchars($last_name);
 $sex             = htmlspecialchars($sex);
@@ -81,7 +83,7 @@ $postalcode_view = htmlspecialchars($postalcode_view);
 $prefecture      = htmlspecialchars($prefecture);
 $email           = htmlspecialchars($email);
 $comment         = htmlspecialchars($comment);
-$hobby           = htmlspecialchars($hobby);
+$hobby_view      = htmlspecialchars($hobby_view);
 
 ?>
 
@@ -147,7 +149,7 @@ $hobby           = htmlspecialchars($hobby);
         <tr>
           <th>趣味</th>
           <td>
-          <?php print $hobby; #ここに配列hobbyの中身を半角スペースかカンマ区切りで1列に表示したい! ?> 
+          <?php print $hobby_view; #ここに配列hobbyの中身を半角スペースかカンマ区切りで1列に表示したい! ?> 
           </td>
         </tr>
 

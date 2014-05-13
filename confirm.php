@@ -1,4 +1,9 @@
 <?php
+//セッション管理
+session_start();
+$_SESSION['hobby']=$hobby;
+$_SESSION['errormsg']=$errormsg;
+
 //空白処理
 foreach($_POST as $value){
     //半角スペースを除く
@@ -33,7 +38,7 @@ if(empty($first_name)){
     $errormsg[] = '姓は全角で入力してください。';
 }elseif(mb_strlen($first_name, 'utf-8') > 50){
     $errormsg[] = '姓は50文字以内で入力してください。';
-}else{print '姓は正しく入力されています。<br />';}
+}//else{print '姓は正しく入力されています。<br />';}
 
 if(empty($last_name)){
     $errormsg[] = '名を入力してください。';
@@ -41,34 +46,38 @@ if(empty($last_name)){
     $errormsg[] = '名は全角で入力してください。';
 }elseif(mb_strlen($last_name, 'utf-8') > 50){
     $errormsg[] = '姓は50文字以内で入力してください。';
-}else{print '名は正しく入力されています。<br />';}
+}//else{print '名は正しく入力されています。<br />';}
 
 if(empty($sex)){
     $errormsg[] = '性別を選択してください。';
-}else{print '性別は正しく選択されています。<br />';}
+}//else{print '性別は正しく選択されています。<br />';}
 
 if(empty($postalcode[(0|1)])){
     $errormsg[] = '郵便番号を入力してください。';
-}else{print '郵便番号は正しく入力されています。<br />';}
+}//else{print '郵便番号は正しく入力されています。<br />';}
 
 if(empty($prefecture)){
     $errormsg[] = '都道府県を選択してください。';
-}else{print '都道府県は正しく選択されています。<br />';}
+}//else{print '都道府県は正しく選択されています。<br />';}
 
 if(empty($email)){
     $errormsg[] = 'メールアドレスを入力してください。';
 }elseif(preg_match("/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/", $email)){
-    print 'メールアドレスは正しく入力されています。<br />';
+  //  print 'メールアドレスは正しく入力されています。<br />';
 }else{$errormsg[] =  'メールアドレスを正しく入力してください。<br />';}
 
 if($hobby[3] =="その他："  && empty($hobby[4])){
     $errormsg[] = 'その他の詳細を入力してください。<br />';
-}else{print 'その他の趣味の詳細が正しく入力されています。<br />';}
+}//else{print 'その他の趣味の詳細が正しく入力されています。<br />';}
 
-$count_errormsg = count($errormsg);
-
-for ($i = 0; $i < $count_errormsg; $i++){
-    print "$errormsg[$i]<br />\n";
+#エラー文言がある場合、フォーム画面に戻す
+if(isset($errormsg)){
+    $_SESSION['errormsg'] = $errormsg;
+    print'<script>window.history.back()</script>';
+/*
+# javascript使わずに入力値をフォームに入れる方法？
+    header('Location:'.$_SERVER['HTTP_REFERER']);
+*/
 }
 
 #配列のkeyと値確認用

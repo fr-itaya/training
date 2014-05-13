@@ -1,5 +1,19 @@
 <?php
+//セッション管理
+session_start();
+foreach($_SESSION['errormsg'] as $key => $value){
+    $errormsg[$key] = $value;
+}
+//エラーがある場合はエラー文言を表示
+if(isset($errormsg)==true){
+    $count_errormsg = count($errormsg);
+    for($i = 0; $i < $count_errormsg; $i++){
+        print "$errormsg[$i]<br />\n";
+    } 
+}
 
+
+//住所欄の都道府県セレクトボックスを生成
 function GetSelectBoxTag($prefecture_array, $prefecture_name, $prefecture_sel_value = '') {
     $menu_tag = '';
 
@@ -81,7 +95,12 @@ $menu_tag = GetSelectBoxTag($menu_array, $menu_name, $sel_value);
           <input type="hidden" name="hobby[2]" value="">
           <input type="checkbox" name="hobby[2]" value="映画鑑賞">映画鑑賞
           <input type="hidden" name="hobby[3]" value="">
-          <input type="checkbox" name="hobby[3]" value="その他：">その他
+          <input type="checkbox" name="hobby[3]" value="その他：" 
+<?php
+# ここでhobby[4]に値が入っているかどうか→checkedにするかどうか
+    print 'checked';
+?>
+          >その他
           <input type="text" name="hobby[4]" size="10" maxlength="15">
         </p>
 
@@ -92,7 +111,7 @@ $menu_tag = GetSelectBoxTag($menu_array, $menu_name, $sel_value);
     </form>
   </section>
 
-   <footer>
+  <footer>
      <p>&copy; 2014</p>
   </footer>
 </body>

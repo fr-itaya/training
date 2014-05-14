@@ -17,7 +17,6 @@ $given_name      = $_POST['given_name'];
 $sex             = $_POST['sex'];
 $postalcode      = $_POST['postalcode'];
 $postalcode_view = implode('-', $postalcode);
-#3桁-4桁に区切ったものをハイフン入れて連結させたい←完了
 $prefecture      = $_POST['prefecture'];
 $email           = $_POST['email'];
 $comment         = $_POST['comment'];

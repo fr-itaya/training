@@ -48,7 +48,7 @@ $sel_value = 13; //東京都のこと
 //セレクトボックス作成関数呼び出し
 $menu_tag = GetSelectBoxTag($menu_array, $menu_name, $sel_value);
 
-//ラジオボタン表示用
+//ラジオボタン入力値保持
 $sex_checked = array();
 if(isset($_SESSION['sex']) && ($_SESSION['sex'] == '男性')){
     $sex_checked[0] = 'checked';
@@ -56,6 +56,15 @@ if(isset($_SESSION['sex']) && ($_SESSION['sex'] == '男性')){
     $sex_checked[1] = 'checked';
 }
 
+//セレクトボタン入力値保持
+$hobby_checked = array();
+if(isset($_SESSION['hobby'])){
+    foreach(array_slice($_SESSION['hobby'], 0, 3) as $key => $value){
+        $hobby_checked[$key] = 'checked';
+    }
+}
+
+print_r($_SESSION);
 ?>
 
 <!DOCTYPE html>
@@ -101,15 +110,15 @@ if(isset($_SESSION['sex']) && ($_SESSION['sex'] == '男性')){
         <p>
           <label>趣味はなんですか：</label>
           <input type="hidden" name="hobby[1]" value="">
-          <input type="checkbox" name="hobby[1]" value="音楽鑑賞">音楽鑑賞
+          <input type="checkbox" name="hobby[1]" value="音楽鑑賞" <?php print $hobby_checked[1]; ?>>音楽鑑賞
           <input type="hidden" name="hobby[2]" value="">
-          <input type="checkbox" name="hobby[2]" value="映画鑑賞">映画鑑賞
+          <input type="checkbox" name="hobby[2]" value="映画鑑賞" <?php print $hobby_checked[2]; ?>>映画鑑賞
           <input type="hidden" name="hobby[3]" value="">
-          <input type="checkbox" name="hobby[3]" value="その他：">その他
+          <input type="checkbox" name="hobby[3]" value="その他：" <?php print $hobby_checked[3]; ?>>その他
           <input type="text" name="hobby[4]" size="10" maxlength="15" value="<?php print $_SESSION['hobby'][4]; ?>">
         </p>
 
-        <p><label>ご意見：</label><textarea name="comment" cols="20" rows="2" maxlength="40" value="<?php print $_SESSION['comment']; ?>"></textarea></p>
+        <p><label>ご意見：</label><textarea name="comment" cols="20" rows="2" maxlength="40"><?php print $_SESSION['comment']; ?></textarea></p>
 
         <p><input type="submit" value="確認" formaction="confirm.php"></p>
       </fieldset>

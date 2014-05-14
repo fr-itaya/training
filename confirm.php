@@ -1,8 +1,8 @@
 <?php
 //セッション管理
 session_start();
-$_SESSION['hobby']=$hobby;
-$_SESSION['errormsg']=$errormsg;
+//$_SESSION['hobby'] = array();
+$_SESSION[] = array();
 
 //空白処理
 foreach($_POST as $value){
@@ -12,17 +12,17 @@ foreach($_POST as $value){
     $value = preg_replace('/^[\s ]*(.*?)[\s ]*$/u', '\1', $value);
 }
 
-$first_name=$_POST['first_name'];
-$last_name=$_POST['last_name'];
-$sex=$_POST['sex'];
-$postalcode=$_POST['postalcode'];
+$family_name     = $_POST['family_name'];
+$given_name      = $_POST['given_name'];
+$sex             = $_POST['sex'];
+$postalcode      = $_POST['postalcode'];
 $postalcode_view = implode('-', $postalcode);
 #3桁-4桁に区切ったものをハイフン入れて連結させたい←完了
-$prefecture=$_POST['prefecture'];
-$email=$_POST['email'];
-$comment=$_POST['comment'];
+$prefecture      = $_POST['prefecture'];
+$email           = $_POST['email'];
+$comment         = $_POST['comment'];
 
-# _POST['hobby']配列の中身をそのまま$hobby[]に格納したい！！
+# _POST['hobby']配列の中身をそのまま$hobby[]に格納したい
 # このあとの処理で、その他にチェックが入っているか、textboxに入力があるかを配列に値があるかどうかで判断したい
 #連想配列で格納してみる
 
@@ -32,19 +32,19 @@ foreach ($_POST['hobby'] as $key => $value){
 
 $errormsg = array();
 
-if(empty($first_name)){
+if(empty($family_name)){
     $errormsg[] = '姓を入力してください。';
-}elseif(preg_match("/(?:\xEF\xBD[\xA1-\xBF]|\xEF\xBE[\x80-\x9F])|[\x20-\x7E]/", $first_name)){
+}elseif(preg_match("/(?:\xEF\xBD[\xA1-\xBF]|\xEF\xBE[\x80-\x9F])|[\x20-\x7E]/", $family_name)){
     $errormsg[] = '姓は全角で入力してください。';
-}elseif(mb_strlen($first_name, 'utf-8') > 50){
+}elseif(mb_strlen($family_name, 'utf-8') > 50){
     $errormsg[] = '姓は50文字以内で入力してください。';
 }//else{print '姓は正しく入力されています。<br />';}
 
-if(empty($last_name)){
+if(empty($given_name)){
     $errormsg[] = '名を入力してください。';
-}elseif(preg_match("/(?:\xEF\xBD[\xA1-\xBF]|\xEF\xBE[\x80-\x9F])|[\x20-\x7E]/", $first_name)){
+}elseif(preg_match("/(?:\xEF\xBD[\xA1-\xBF]|\xEF\xBE[\x80-\x9F])|[\x20-\x7E]/", $given_name)){
     $errormsg[] = '名は全角で入力してください。';
-}elseif(mb_strlen($last_name, 'utf-8') > 50){
+}elseif(mb_strlen($given_name, 'utf-8') > 50){
     $errormsg[] = '姓は50文字以内で入力してください。';
 }//else{print '名は正しく入力されています。<br />';}
 
@@ -66,34 +66,37 @@ if(empty($email)){
   //  print 'メールアドレスは正しく入力されています。<br />';
 }else{$errormsg[] =  'メールアドレスを正しく入力してください。<br />';}
 
-if($hobby[3] =="その他："  && empty($hobby[4])){
+if($hobby[3] == 'その他：'  && empty($hobby[4])){
     $errormsg[] = 'その他の詳細を入力してください。<br />';
 }//else{print 'その他の趣味の詳細が正しく入力されています。<br />';}
 
 #エラー文言がある場合、フォーム画面に戻す
 if(isset($errormsg)){
-    $_SESSION['errormsg'] = $errormsg;
-    print'<script>window.history.back()</script>';
-/*
-# javascript使わずに入力値をフォームに入れる方法？
-    header('Location:'.$_SERVER['HTTP_REFERER']);
-*/
+/*    foreach($_POST as $key => $value){
+        $_SESSION[$key] => $value;
+    }*/
+    $_SESSION['family_name'] = $_POST['family_name'];
+    $_SESSION['given_name']  = $_POST['given_name'];
+    $_SESSION['sex']         = $_POST['sex'];
+    $_SESSION['postalcode']  = $_POST['postalcode'];
+    $_SESSION['prefecture']  = $_POST['prefecture'];
+    $_SESSION['email']       = $_POST['email'];
+    $_SESSION['hobby']       = $_POST['hobby'];
+    $_SESSION['comment']     = $_POST['comment'];
+    $_SESSION['errormsg']    = $errormsg;
+    header("Location: {$_SERVER['HTTP_REFERER']}");
 }
-
-#配列のkeyと値確認用
-print_r ($_POST['hobby']);
-print_r ($hobby);
 
 $hobby_view = implode(' ', array_slice($hobby, 0, 3)).'('.$hobby[4].')';
 
-$first_name      = htmlspecialchars($first_name);
-$last_name       = htmlspecialchars($last_name);
-$sex             = htmlspecialchars($sex);
-$postalcode_view = htmlspecialchars($postalcode_view);
-$prefecture      = htmlspecialchars($prefecture);
-$email           = htmlspecialchars($email);
-$comment         = htmlspecialchars($comment);
-$hobby_view      = htmlspecialchars($hobby_view);
+$family_name      = htmlspecialchars($family_name);
+$given_name       = htmlspecialchars($given_name);
+$sex              = htmlspecialchars($sex);
+$postalcode_view  = htmlspecialchars($postalcode_view);
+$prefecture       = htmlspecialchars($prefecture);
+$email            = htmlspecialchars($email);
+$comment          = htmlspecialchars($comment);
+$hobby_view       = htmlspecialchars($hobby_view);
 
 ?>
 
@@ -117,14 +120,14 @@ $hobby_view      = htmlspecialchars($hobby_view);
         <tr>
           <th>姓</th>
           <td>
-          <?php print $first_name; ?>
+          <?php print $family_name; ?>
           </td>
         </tr>
 
         <tr>
           <th>名</th>
           <td>
-          <?php print $last_name; ?>
+          <?php print $given_name; ?>
           </td>
         </tr>
 

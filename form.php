@@ -1,17 +1,18 @@
 <?php
 //セッション管理
 session_start();
+
+$errormsg = array();
 foreach($_SESSION['errormsg'] as $key => $value){
     $errormsg[$key] = $value;
 }
 //エラーがある場合はエラー文言を表示
-if(isset($errormsg)==true){
+if(isset($errormsg)){
     $count_errormsg = count($errormsg);
     for($i = 0; $i < $count_errormsg; $i++){
         print "$errormsg[$i]<br />\n";
     } 
 }
-
 
 //住所欄の都道府県セレクトボックスを生成
 function GetSelectBoxTag($prefecture_array, $prefecture_name, $prefecture_sel_value = '') {
@@ -47,6 +48,14 @@ $sel_value = 13; //東京都のこと
 //セレクトボックス作成関数呼び出し
 $menu_tag = GetSelectBoxTag($menu_array, $menu_name, $sel_value);
 
+//ラジオボタン表示用
+$sex_checked = array();
+if(isset($_SESSION['sex']) && ($_SESSION['sex'] == '男性')){
+    $sex_checked[0] = 'checked';
+}elseif(isset($_SESSION['sex']) && ($_SESSION['sex'] == '女性')){
+    $sex_checked[1] = 'checked';
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -68,25 +77,26 @@ $menu_tag = GetSelectBoxTag($menu_array, $menu_name, $sel_value);
         <legend>フォーム</legend>
   
         <p>
-          <label>姓：</label><input type="text" name="first_name" size="20"><label>名：</label><input type="text" name="last_name" size="20">
+          <label>姓：</label><input type="text" name="family_name" size="20" value="<?php print $_SESSION['family_name']; ?>">
+          <label>名：</label><input type="text" name="given_name" size="20" value="<?php print $_SESSION['given_name']; ?>">
         </p>
 
         <p>
           <label>性別：</label>
           <ul>
-            <li><input type="radio" name="sex" value="男性"/>男性</li>
-            <li><input type="radio" name="sex" value="女性"/>女性</li>
+            <li><input type="radio" name="sex" value="男性" <?php print $sex_checked[0]; ?>/>男性</li>
+            <li><input type="radio" name="sex" value="女性" <?php print $sex_checked[1]; ?>/>女性</li>
           </ul>
         </p>
 
-        <p><label>郵便番号：</label><input type="text" name="postalcode[zone]" size="10" maxlength="3">-<input type="text" name="postalcode[district]" size="10" maxlength="4"></p>
+        <p><label>郵便番号：</label><input type="text" name="postalcode[]" size="10" maxlength="3" value="<?php print $_SESSION['postalcode'][0]; ?>">-<input type="text" name="postalcode[]" size="10" maxlength="4" value="<?php print $_SESSION['postalcode'][1]; ?>"></p>
 
         <p>
           <label>都道府県：</label>
           <?php echo $menu_tag; ?>
         </p>
 
-        <p><label>メールアドレス：</label><input type="email" name="email" size="30" maxlength="40"></p>
+        <p><label>メールアドレス：</label><input type="email" name="email" size="30" maxlength="40" value="<?php print $_SESSION['email']; ?>"></p>
 
         <p>
           <label>趣味はなんですか：</label>
@@ -95,16 +105,11 @@ $menu_tag = GetSelectBoxTag($menu_array, $menu_name, $sel_value);
           <input type="hidden" name="hobby[2]" value="">
           <input type="checkbox" name="hobby[2]" value="映画鑑賞">映画鑑賞
           <input type="hidden" name="hobby[3]" value="">
-          <input type="checkbox" name="hobby[3]" value="その他：" 
-<?php
-# ここでhobby[4]に値が入っているかどうか→checkedにするかどうか
-    print 'checked';
-?>
-          >その他
-          <input type="text" name="hobby[4]" size="10" maxlength="15">
+          <input type="checkbox" name="hobby[3]" value="その他：">その他
+          <input type="text" name="hobby[4]" size="10" maxlength="15" value="<?php print $_SESSION['hobby'][4]; ?>">
         </p>
 
-        <p><label>ご意見：</label><textarea name="comment" cols="20" rows="2" maxlength="40"></textarea></p>
+        <p><label>ご意見：</label><textarea name="comment" cols="20" rows="2" maxlength="40" value="<?php print $_SESSION['comment']; ?>"></textarea></p>
 
         <p><input type="submit" value="確認" formaction="confirm.php"></p>
       </fieldset>

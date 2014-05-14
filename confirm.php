@@ -3,11 +3,10 @@
 session_start();
 
 //空白処理
+//$value = trim(mb_convert_kana($value, "s")); だと全角スペースの変換すら出来ず
 foreach($_POST as $value){
-    //半角スペースを除く
+    $value = mb_convert_kana($value, 's', 'utf-8');
     $value = trim($value);
-    //全角スペースを除く
-    $value = preg_replace('/^[\s ]*(.*?)[\s ]*$/u', '\1', $value);
 }
 
 $family_name     = $_POST['family_name'];
@@ -27,7 +26,7 @@ foreach ($_POST['hobby'] as $key => $value){
     $hobby[$key] = $value;
 }
 
-$errormsg = array();
+$errormsg = '';
 
 if(empty($family_name)){
     $errormsg[] = '姓を入力してください。';

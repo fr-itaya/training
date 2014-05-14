@@ -60,7 +60,11 @@ if(isset($_SESSION['sex']) && ($_SESSION['sex'] == '男性')){
 $hobby_checked = array();
 if(isset($_SESSION['hobby'])){
     foreach(array_slice($_SESSION['hobby'], 0, 4) as $key => $value){
-        $hobby_checked[$key] = 'checked';
+        if($_SESSION['hobby'][$key] != NULL){
+            $hobby_checked[$key] = 'checked';
+        }else{
+            $hobby_checked[$key] = '';
+        }
     }
 }
 
@@ -68,6 +72,7 @@ if(isset($_SESSION['hobby'])){
 
 
 print_r($_SESSION);
+print_r($hobby_checked);
 ?>
 
 <!DOCTYPE html>

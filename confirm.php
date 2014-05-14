@@ -1,8 +1,6 @@
 <?php
 //セッション管理
 session_start();
-//$_SESSION['hobby'] = array();
-$_SESSION[] = array();
 
 //空白処理
 foreach($_POST as $value){
@@ -67,13 +65,12 @@ if(empty($email)){
 
 if($hobby[3] == 'その他：'  && empty($hobby[4])){
     $errormsg[] = 'その他の詳細を入力してください。<br />';
-}//else{print 'その他の趣味の詳細が正しく入力されています。<br />';}
+}elseif(empty($hobby[3]) && isset($hobby[4])){
+    $hobby[3] = 'その他：';
+}
 
 #エラー文言がある場合、フォーム画面に戻す
 if(isset($errormsg)){
-/*    foreach($_POST as $key => $value){
-        $_SESSION[$key] => $value;
-    }*/
     $_SESSION['family_name'] = $_POST['family_name'];
     $_SESSION['given_name']  = $_POST['given_name'];
     $_SESSION['sex']         = $_POST['sex'];

@@ -2,27 +2,27 @@
 //セッション管理
 session_start();
 
+//空白処理用にPOSTデータを配列に格納
+$formData = array();
 //空白処理
-//$value = trim(mb_convert_kana($value, "s")); だと全角スペースの変換すら出来ず
-foreach($_POST as $value){
-    $value = mb_convert_kana($value, 's', 'utf-8');
-    $value = trim($value);
+foreach($_POST as $key =>  $value){
+    $formData[$key] = trim(mb_convert_kana($value, 's', 'utf-8'));
 }
 
-$family_name     = $_POST['family_name'];
-$given_name      = $_POST['given_name'];
-$sex             = $_POST['sex'];
-$postalcode      = $_POST['postalcode'];
+$family_name     = $formData['family_name'];
+$given_name      = $formData['given_name'];
+$sex             = $formData['sex'];
+$postalcode      = $formData['postalcode'];
 $postalcode_view = implode('-', $postalcode);
-$prefecture      = $_POST['prefecture'];
-$email           = $_POST['email'];
-$comment         = $_POST['comment'];
+$prefecture      = $formData['prefecture'];
+$email           = $formData['email'];
+$comment         = $formData['comment'];
 
-# _POST['hobby']配列の中身をそのまま$hobby[]に格納したい
+# formData['hobby']配列の中身をそのまま$hobby[]に格納したい
 # このあとの処理で、その他にチェックが入っているか、textboxに入力があるかを配列に値があるかどうかで判断したい
 #連想配列で格納してみる
 
-foreach ($_POST['hobby'] as $key => $value){
+foreach ($formData['hobby'] as $key => $value){
     $hobby[$key] = $value;
 }
 
@@ -70,14 +70,14 @@ if($hobby[3] == 'その他：'  && empty($hobby[4])){
 
 #エラー文言がある場合、フォーム画面に戻す
 if(isset($errormsg)){
-    $_SESSION['family_name'] = $_POST['family_name'];
-    $_SESSION['given_name']  = $_POST['given_name'];
-    $_SESSION['sex']         = $_POST['sex'];
-    $_SESSION['postalcode']  = $_POST['postalcode'];
-    $_SESSION['prefecture']  = $_POST['prefecture'];
-    $_SESSION['email']       = $_POST['email'];
-    $_SESSION['hobby']       = $_POST['hobby'];
-    $_SESSION['comment']     = $_POST['comment'];
+    $_SESSION['family_name'] = $formData['family_name'];
+    $_SESSION['given_name']  = $formData['given_name'];
+    $_SESSION['sex']         = $formData['sex'];
+    $_SESSION['postalcode']  = $formData['postalcode'];
+    $_SESSION['prefecture']  = $formData['prefecture'];
+    $_SESSION['email']       = $formData['email'];
+    $_SESSION['hobby']       = $formData['hobby'];
+    $_SESSION['comment']     = $formData['comment'];
     $_SESSION['errormsg']    = $errormsg;
     header("Location: {$_SERVER['HTTP_REFERER']}");
 }

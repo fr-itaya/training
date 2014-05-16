@@ -5,8 +5,16 @@ session_start();
 //空白処理用にPOSTデータを配列に格納
 $formData = array();
 //空白処理
-foreach($_POST as $key =>  $value){
-    $formData[$key] = trim(mb_convert_kana($value, 's', 'utf-8'));
+foreach($_POST as $key => $value){
+    if(is_array($_POST[$key])){
+//配列用
+        foreach($_POST[$key] as $key_array => $value_array){
+            $formData[$key][$key_array] = trim(mb_convert_kana($_POST[$key][$key_array], 's', 'utf-8'));
+        }
+    }else{
+//変数用の処理
+        $formData[$key] = trim(mb_convert_kana($value, 's', 'utf-8'));
+    }
 }
 
 $family_name     = $formData['family_name'];
@@ -48,10 +56,13 @@ if(empty($sex)){
     $errormsg[] = '性別を選択してください。';
 }//else{print '性別は正しく選択されています。<br />';}
 
-if(empty($postalcode[(0|1)])){
+if(empty($postalcode[0|1])){
     $errormsg[] = '郵便番号を入力してください。';
-}//else{print '郵便番号は正しく入力されています。<br />';}
-
+}elseif(preg_match_all('/^[0-9]{3}-[0-9]{4}$/', $postalcode_view)){
+    print '郵便番号は正しく入力されています。<br />';
+}else{
+    $errormsg[] = '郵便番号を正しく入力してください。';
+}
 if(empty($prefecture)){
     $errormsg[] = '都道府県を選択してください。';
 }//else{print '都道府県は正しく選択されています。<br />';}
@@ -92,6 +103,9 @@ $prefecture       = htmlspecialchars($prefecture);
 $email            = htmlspecialchars($email);
 $comment          = htmlspecialchars($comment);
 $hobby_view       = htmlspecialchars($hobby_view);
+
+//var_dump($postalcode);
+//var_dump($hobby);
 
 ?>
 

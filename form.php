@@ -73,6 +73,7 @@ if(isset($_SESSION['hobby'])){
 
 print_r($_SESSION);
 print_r($hobby_checked);
+print_r($_POST['hobby']);
 ?>
 
 <!DOCTYPE html>

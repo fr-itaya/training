@@ -6,10 +6,10 @@ session_start();
 $formData = array();
 //空白処理
 foreach($_POST as $key => $value){
-    if(is_array($_POST[$key])){
+    if(is_array($value)){
 //配列用
-        foreach($_POST[$key] as $key_array => $value_array){
-            $formData[$key][$key_array] = trim(mb_convert_kana($_POST[$key][$key_array], 's', 'utf-8'));
+        foreach($value as $key_array => $value_array){
+            $formData[$key][$key_array] = trim(mb_convert_kana($value[$key_array], 's', 'utf-8'));
         }
     }else{
 //変数用の処理
@@ -56,7 +56,7 @@ if(empty($sex)){
     $errormsg[] = '性別を選択してください。';
 }//else{print '性別は正しく選択されています。<br />';}
 
-if(empty($postalcode[0|1])){
+if(empty($postalcode[zone]) || empty($postalcode[district])){
     $errormsg[] = '郵便番号を入力してください。';
 }elseif(preg_match_all('/^[0-9]{3}-[0-9]{4}$/', $postalcode_view)){
     print '郵便番号は正しく入力されています。<br />';

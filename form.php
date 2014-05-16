@@ -107,7 +107,7 @@ print_r($_POST['hobby']);
           </ul>
         </p>
 
-        <p><label>郵便番号：</label><input type="text" name="postalcode[]" size="10" maxlength="3" value="<?php print $_SESSION['postalcode'][0]; ?>">-<input type="text" name="postalcode[]" size="10" maxlength="4" value="<?php print $_SESSION['postalcode'][1]; ?>"></p>
+        <p><label>郵便番号：</label><input type="text" name="postalcode[zone]" size="10" maxlength="3" value="<?php print $_SESSION['postalcode']['zone']; ?>">-<input type="text" name="postalcode[district]" size="10" maxlength="4" value="<?php print $_SESSION['postalcode']['district']; ?>"></p>
 
         <p>
           <label>都道府県：</label>

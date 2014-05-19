@@ -74,6 +74,7 @@ if(isset($_SESSION['hobby'])){
 //テキストボックスとチェックボックス「その他」の連動
 print_r($_SESSION);
 print_r($hobby_checked);
+//var_dump($errormsg);exit;
 ?>
 
 <!DOCTYPE html>
@@ -124,7 +125,7 @@ print_r($hobby_checked);
           <input type="checkbox" name="hobby[2]" value="映画鑑賞" <?php if(isset($hobby_checked[2])) print $hobby_checked[2]; ?>>映画鑑賞
           <input type="hidden" name="hobby[3]" value="">
           <input type="checkbox" name="hobby[3]" value="その他：" <?php if(isset($hobby_checked[3])) print $hobby_checked[3]; ?>>その他
-          <input type="text" name="hobby[4]" size="10" maxlength="15" value=" <?php if(isset($_SESSION['hobby'][4])) print $_SESSION['hobby'][4]; ?> ">
+          <input type="text" name="hobby[4]" size="10" maxlength="15" value="<?php if(isset($_SESSION['hobby'][4])) print $_SESSION['hobby'][4]; ?>">
         </p>
 
         <p><label>ご意見：</label><textarea name="comment" cols="20" rows="2" maxlength="40"><?php if(isset($_SESSION['comment'])) print $_SESSION['comment']; ?></textarea></p>

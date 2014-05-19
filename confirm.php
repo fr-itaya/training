@@ -34,7 +34,7 @@ foreach ($formData['hobby'] as $key => $value){
     $hobby[$key] = $value;
 }
 
-$errormsg = '';
+$errormsg = array();
 
 if(empty($family_name)){
     $errormsg[] = '姓を入力してください。';
@@ -80,7 +80,7 @@ if($hobby[3] == 'その他：'  && empty($hobby[4])){
 }
 
 #エラー文言がある場合、フォーム画面に戻す
-if(isset($errormsg)){
+if(empty($errormsg) == false){
     $_SESSION['family_name'] = $formData['family_name'];
     $_SESSION['given_name']  = $formData['given_name'];
     $_SESSION['sex']         = $formData['sex'];
@@ -95,17 +95,14 @@ if(isset($errormsg)){
 
 $hobby_view = implode(' ', array_slice($hobby, 0, 3)).'('.$hobby[4].')';
 
-$family_name      = htmlspecialchars($family_name);
-$given_name       = htmlspecialchars($given_name);
-$sex              = htmlspecialchars($sex);
-$postalcode_view  = htmlspecialchars($postalcode_view);
-$prefecture       = htmlspecialchars($prefecture);
-$email            = htmlspecialchars($email);
-$comment          = htmlspecialchars($comment);
-$hobby_view       = htmlspecialchars($hobby_view);
-
-//var_dump($postalcode);
-//var_dump($hobby);
+$family_name      = htmlspecialchars($family_name, ENT_QUOTES);
+$given_name       = htmlspecialchars($given_name, ENT_QUOTES);
+$sex              = htmlspecialchars($sex, ENT_QUOTES);
+$postalcode_view  = htmlspecialchars($postalcode_view, ENT_QUOTES);
+$prefecture       = htmlspecialchars($prefecture, ENT_QUOTES);
+$email            = htmlspecialchars($email, ENT_QUOTES);
+$comment          = htmlspecialchars($comment, ENT_QUOTES);
+$hobby_view       = htmlspecialchars($hobby_view, ENT_QUOTES);
 
 ?>
 

@@ -34,7 +34,7 @@ foreach ($formData['hobby'] as $key => $value){
     $hobby[$key] = $value;
 }
 
-$errormsg = '';
+$errormsg = array();
 
 if(empty($family_name)){
     $errormsg[] = '姓を入力してください。';
@@ -56,10 +56,10 @@ if(empty($sex)){
     $errormsg[] = '性別を選択してください。';
 }//else{print '性別は正しく選択されています。<br />';}
 
-if(empty($postalcode[zone]) || empty($postalcode[district])){
+if(empty($postalcode['zone']) || empty($postalcode['district'])){
     $errormsg[] = '郵便番号を入力してください。';
 }elseif(preg_match_all('/^[0-9]{3}-[0-9]{4}$/', $postalcode_view)){
-    print '郵便番号は正しく入力されています。<br />';
+/*    print '郵便番号は正しく入力されています。<br />';*/
 }else{
     $errormsg[] = '郵便番号を正しく入力してください。';
 }
@@ -90,7 +90,7 @@ if(isset($errormsg)){
     $_SESSION['hobby']       = $formData['hobby'];
     $_SESSION['comment']     = $formData['comment'];
     $_SESSION['errormsg']    = $errormsg;
-    header("Location: {$_SERVER['HTTP_REFERER']}");
+    header("Location:{$_SERVER['HTTP_REFERER']}");
 }
 
 $hobby_view = implode(' ', array_slice($hobby, 0, 3)).'('.$hobby[4].')';

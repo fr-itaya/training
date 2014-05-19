@@ -3,16 +3,14 @@
 session_start();
 
 $errormsg = array();
-if(isset($_SESSION['erroromsg'])){
-    if(is_array($_SESSION['errormsg'])){
-        foreach($_SESSION['errormsg'] as $key => $value){
-            $errormsg[$key] = $value;
-        }
+if(isset($_SESSION['erroromsg']) && is_array($_SESSION['errormsg'])){
+    foreach($_SESSION['errormsg'] as $key => $value){
+        $errormsg[$key] = $value;
     }
 }
 
 //エラーがある場合はエラー文言を表示
-if(isset($errormsg)){
+if(empty($errormsg) != true){
     $count_errormsg = count($errormsg);
     for($i = 0; $i < $count_errormsg; $i++){
         print "$errormsg[$i]<br />\n";
@@ -56,9 +54,9 @@ $menu_tag = GetSelectBoxTag($menu_array, $menu_name, $sel_value);
 //ラジオボタン入力値保持
 $sex_checked = array();
 if(isset($_SESSION['sex']) && ($_SESSION['sex'] == '男性')){
-    $sex_checked[] = 'checked';
+    $sex_checked[0] = 'checked';
 }elseif(isset($_SESSION['sex']) && ($_SESSION['sex'] == '女性')){
-    $sex_checked[] = 'checked';
+    $sex_checked[1] = 'checked';
 }
 
 //セレクトボタン入力値保持
@@ -97,37 +95,15 @@ print_r($hobby_checked);
         <legend>フォーム</legend>
   
         <p>
-          <label>姓：</label><input type="text" name="family_name" size="20" value="
-<?php
-if(isset($_SESSION['family_name'])){
-    print $_SESSION['family_name'];
-}
-?>">
-          <label>名：</label><input type="text" name="given_name" size="20" value="
-<?php
-if(isset($_SESSION['given_name'])){
-    print $_SESSION['given_name'];
-}
-?>">
+          <label>姓：</label><input type="text" name="family_name" size="20" value="<?php if(isset($_SESSION['family_name'])) print $_SESSION['family_name']; ?>">
+          <label>名：</label><input type="text" name="given_name" size="20" value="<?php if(isset($_SESSION['given_name'])) print $_SESSION['given_name']; ?>">
         </p>
 
         <p>
           <label>性別：</label>
           <ul>
-            <li><input type="radio" name="sex" value="男性"
-<?php
-if(isset($sex_checked[0])){
-    print $sex_checked[0];
-}
-?>
-/>男性</li>
-            <li><input type="radio" name="sex" value="女性"
-<?php
-if(isset($sex_checked[1])){
-    print $sex_checked[1];
-}
-?>
-/>女性</li>
+            <li><input type="radio" name="sex" value="男性" <?php if(isset($sex_checked[0])) print $sex_checked[0]; ?>/>男性</li>
+            <li><input type="radio" name="sex" value="女性" <?php if(isset($sex_checked[1])) print $sex_checked[1];?>/>女性</li>
           </ul>
         </p>
 

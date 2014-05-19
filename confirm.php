@@ -34,7 +34,7 @@ foreach ($formData['hobby'] as $key => $value){
     $hobby[$key] = $value;
 }
 
-$errormsg = array();
+$errormsg = '';
 
 if(empty($family_name)){
     $errormsg[] = '姓を入力してください。';

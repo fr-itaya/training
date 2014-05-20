@@ -81,6 +81,9 @@ if($hobby[3] == 'その他：'  && empty($hobby[4])){
     $hobby[3] = 'その他：';
 }
 
+#SQL特殊文字エスケープ用関数
+
+
 #エラー文言がある場合、フォーム画面に戻す
 if(!empty($errormsg)){
     $_SESSION['family_name'] = $formData['family_name'];
@@ -97,14 +100,14 @@ if(!empty($errormsg)){
 
 $hobby_view = implode(' ', array_slice($hobby, 0, 3)).'('.$hobby[4].')';
 
-$family_name      = htmlspecialchars($family_name, ENT_QUOTES);
-$given_name       = htmlspecialchars($given_name, ENT_QUOTES);
-$sex              = htmlspecialchars($sex, ENT_QUOTES);
-$postalcode_view  = htmlspecialchars($postalcode_view, ENT_QUOTES);
-$prefecture       = htmlspecialchars($prefecture, ENT_QUOTES);
-$email            = htmlspecialchars($email, ENT_QUOTES);
-$comment          = htmlspecialchars($comment, ENT_QUOTES);
-$hobby_view       = htmlspecialchars($hobby_view, ENT_QUOTES);
+$family_name      = addslashes(htmlspecialchars($family_name, ENT_QUOTES));
+$given_name       = addslashes(htmlspecialchars($given_name, ENT_QUOTES));
+$sex              = addslashes(htmlspecialchars($sex, ENT_QUOTES));
+$postalcode_view  = addslashes(htmlspecialchars($postalcode_view, ENT_QUOTES));
+$prefecture       = addslashes(htmlspecialchars($prefecture, ENT_QUOTES));
+$email            = addslashes(htmlspecialchars($email, ENT_QUOTES));
+$comment          = addslashes(htmlspecialchars($comment, ENT_QUOTES));
+$hobby_view       = addslashes(htmlspecialchars($hobby_view, ENT_QUOTES));
 
 ?>
 

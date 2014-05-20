@@ -3,16 +3,16 @@
 session_start();
 
 $errormsg = array();
-if(!empty($_SESSION['errormsg'])){
+if (!empty($_SESSION['errormsg'])) {
     $errormsg = $_SESSION['errormsg'];
 }
 
 //エラーがある場合はエラー文言を表示
-if(!empty($errormsg)){
+if (!empty($errormsg)) {
     $count_errormsg = count($errormsg);
-    for($i = 0; $i < $count_errormsg; $i++){
+    for ($i = 0; $i < $count_errormsg; $i++) {
         print "$errormsg[$i]<br />\n";
-    } 
+    }
 }
 
 //住所欄の都道府県セレクトボックスを生成
@@ -51,28 +51,24 @@ $menu_tag = GetSelectBoxTag($menu_array, $menu_name, $sel_value);
 
 //ラジオボタン入力値保持
 $sex_checked = array();
-if(isset($_SESSION['sex']) && ($_SESSION['sex'] == '男性')){
+if (isset($_SESSION['sex']) && ($_SESSION['sex'] == '男性')) {
     $sex_checked[0] = 'checked';
-}elseif(isset($_SESSION['sex']) && ($_SESSION['sex'] == '女性')){
+} elseif (isset($_SESSION['sex']) && ($_SESSION['sex'] == '女性')) {
     $sex_checked[1] = 'checked';
 }
 
 //セレクトボタン入力値保持
 $hobby_checked = array();
-if(isset($_SESSION['hobby'])){
-    foreach(array_slice($_SESSION['hobby'], 0, 3, TRUE) as $key => $value){
-        if($_SESSION['hobby'][$key] != NULL){
+if (isset($_SESSION['hobby'])) {
+    foreach (array_slice($_SESSION['hobby'], 0, 3, TRUE) as $key => $value) {
+        if ($_SESSION['hobby'][$key] != NULL) {
             $hobby_checked[$key] = 'checked';
-        }else{
+        } else {
             $hobby_checked[$key] = '';
         }
     }
 }
 
-//テキストボックスとチェックボックス「その他」の連動
-print_r($_SESSION);
-print_r($hobby_checked);
-//var_dump($errormsg);exit;
 ?>
 
 <!DOCTYPE html>
@@ -94,39 +90,39 @@ print_r($hobby_checked);
         <legend>フォーム</legend>
   
         <p>
-          <label>姓：</label><input type="text" name="family_name" size="20" value="<?php if(isset($_SESSION['family_name'])) print $_SESSION['family_name']; ?>">
-          <label>名：</label><input type="text" name="given_name" size="20" value="<?php if(isset($_SESSION['given_name'])) print $_SESSION['given_name']; ?>">
+          <label>姓：</label><input type="text" name="family_name" size="20" value="<?php if (isset($_SESSION['family_name'])) print $_SESSION['family_name']; ?>">
+          <label>名：</label><input type="text" name="given_name" size="20" value="<?php if (isset($_SESSION['given_name'])) print $_SESSION['given_name']; ?>">
         </p>
 
         <p>
           <label>性別：</label>
           <ul>
-            <li><input type="radio" name="sex" value="男性" <?php if(isset($sex_checked[0])) print $sex_checked[0]; ?>/>男性</li>
-            <li><input type="radio" name="sex" value="女性" <?php if(isset($sex_checked[1])) print $sex_checked[1];?>/>女性</li>
+            <li><input type="radio" name="sex" value="男性" <?php if (isset($sex_checked[0])) print $sex_checked[0]; ?>/>男性</li>
+            <li><input type="radio" name="sex" value="女性" <?php if (isset($sex_checked[1])) print $sex_checked[1]; ?>/>女性</li>
           </ul>
         </p>
 
-        <p><label>郵便番号：</label><input type="text" name="postalcode[zone]" size="10" maxlength="3" value="<?php if(isset($_SESSION['postalcode'])) print $_SESSION['postalcode']['zone']; ?>">-<input type="text" name="postalcode[district]" size="10" maxlength="4" value="<?php if(isset($_SESSION['postalcode'])) print $_SESSION['postalcode']['district']; ?>"></p>
+        <p><label>郵便番号：</label><input type="text" name="postalcode[zone]" size="10" maxlength="3" value="<?php if (isset($_SESSION['postalcode'])) print $_SESSION['postalcode']['zone']; ?>">-<input type="text" name="postalcode[district]" size="10" maxlength="4" value="<?php if (isset($_SESSION['postalcode'])) print $_SESSION['postalcode']['district']; ?>"></p>
 
         <p>
           <label>都道府県：</label>
           <?php echo $menu_tag; ?>
         </p>
 
-        <p><label>メールアドレス：</label><input type="email" name="email" size="30" maxlength="40" value="<?php if(isset($_SESSION['email'])) print $_SESSION['email']; ?>"></p>
+        <p><label>メールアドレス：</label><input type="email" name="email" size="30" maxlength="40" value="<?php if (isset($_SESSION['email'])) print $_SESSION['email']; ?>"></p>
 
         <p>
           <label>趣味はなんですか：</label>
           <input type="hidden" name="hobby[1]" value="">
-          <input type="checkbox" name="hobby[1]" value="音楽鑑賞" <?php if(isset($hobby_checked[1])) print $hobby_checked[1]; ?>>音楽鑑賞
+          <input type="checkbox" name="hobby[1]" value="音楽鑑賞" <?php if (isset($hobby_checked[1])) print $hobby_checked[1]; ?>>音楽鑑賞
           <input type="hidden" name="hobby[2]" value="">
-          <input type="checkbox" name="hobby[2]" value="映画鑑賞" <?php if(isset($hobby_checked[2])) print $hobby_checked[2]; ?>>映画鑑賞
+          <input type="checkbox" name="hobby[2]" value="映画鑑賞" <?php if (isset($hobby_checked[2])) print $hobby_checked[2]; ?>>映画鑑賞
           <input type="hidden" name="hobby[3]" value="">
-          <input type="checkbox" name="hobby[3]" value="その他：" <?php if(isset($hobby_checked[3])) print $hobby_checked[3]; ?>>その他
-          <input type="text" name="hobby[4]" size="10" maxlength="15" value="<?php if(isset($_SESSION['hobby'][4])) print $_SESSION['hobby'][4]; ?>">
+          <input type="checkbox" name="hobby[3]" value="その他：" <?php if (isset($hobby_checked[3])) print $hobby_checked[3]; ?>>その他
+          <input type="text" name="hobby[4]" size="10" maxlength="15" value="<?php if (isset($_SESSION['hobby'][4])) print $_SESSION['hobby'][4]; ?>">
         </p>
 
-        <p><label>ご意見：</label><textarea name="comment" cols="20" rows="2" maxlength="40"><?php if(isset($_SESSION['comment'])) print $_SESSION['comment']; ?></textarea></p>
+        <p><label>ご意見：</label><textarea name="comment" cols="20" rows="2" maxlength="40"><?php if (isset($_SESSION['comment'])) print $_SESSION['comment']; ?></textarea></p>
 
         <p><input type="submit" value="確認" formaction="confirm.php"></p>
       </fieldset>

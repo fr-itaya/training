@@ -3,14 +3,12 @@
 session_start();
 
 $errormsg = array();
-if(isset($_SESSION['erroromsg']) && is_array($_SESSION['errormsg'])){
-    foreach($_SESSION['errormsg'] as $key => $value){
-        $errormsg[$key] = $value;
-    }
+if(!empty($_SESSION['errormsg'])){
+    $errormsg = $_SESSION['errormsg'];
 }
 
 //エラーがある場合はエラー文言を表示
-if(empty($errormsg) != true){
+if(!empty($errormsg)){
     $count_errormsg = count($errormsg);
     for($i = 0; $i < $count_errormsg; $i++){
         print "$errormsg[$i]<br />\n";

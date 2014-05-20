@@ -30,9 +30,11 @@ $comment         = $formData['comment'];
 # このあとの処理で、その他にチェックが入っているか、textboxに入力があるかを配列に値があるかどうかで判断したい
 #連想配列で格納してみる
 
-foreach ($formData['hobby'] as $key => $value){
+/*foreach ($formData['hobby'] as $key => $value){
     $hobby[$key] = $value;
-}
+}*/
+
+$hobby = $formData['hobby'];
 
 $errormsg = array();
 
@@ -80,7 +82,7 @@ if($hobby[3] == 'その他：'  && empty($hobby[4])){
 }
 
 #エラー文言がある場合、フォーム画面に戻す
-if(empty($errormsg) == false){
+if(!empty($errormsg)){
     $_SESSION['family_name'] = $formData['family_name'];
     $_SESSION['given_name']  = $formData['given_name'];
     $_SESSION['sex']         = $formData['sex'];

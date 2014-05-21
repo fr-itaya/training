@@ -69,6 +69,16 @@ if (isset($_SESSION['hobby'])) {
     }
 }
 
+foreach ($_SESSION as $key => $value) {
+    if (is_array($value)) {
+        foreach ($value as $key_array => $value_array) {
+            $_SESSION[$key][$key_array] = addslashes(htmlspecialchars($value[$key_array], ENT_QUOTES));
+        }
+    } else {
+        $_SESSION[$key] = addslashes(htmlspecialchars($value, ENT_QUOTES));
+    }
+}
+
 ?>
 
 <!DOCTYPE html>

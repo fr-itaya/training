@@ -69,6 +69,18 @@ if (!empty($hobby[3]) && empty($hobby[4])) {
 } elseif (empty($hobby[3]) && !empty($hobby[4])) {
     $formData['hobby'][3] = 'その他：';
 }
+#特殊文字エスケープ
+foreach ($formData as $key => $value) {
+    if (is_array($value)) {
+//配列である場合
+        foreach ($value as $key_array => $value_array) {
+            $formData[$key][$key_array] = addslashes(htmlspecialchars($value[$key_array], ENT_QUOTES));
+        }
+    } else {
+//変数である場合
+        $formData[$key] = addslashes(htmlspecialchars($value, ENT_QUOTES));
+    }
+}
 
 #入力データをセッション変数に格納
 $_SESSION['family_name'] = $formData['family_name'];
@@ -84,23 +96,12 @@ $_SESSION['comment']     = $formData['comment'];
 if (!empty($errormsg)) {
     $_SESSION['errormsg'] = $errormsg;
     header("Location:{$_SERVER['HTTP_REFERER']}");
-}else{
-
+} else {
     if (empty($hobby[3]) && empty($hobby[4])) {
         $hobby_view = implode(' ', array_slice($hobby, 0, 3));
     } else {
         $hobby_view = implode(' ', array_slice($hobby, 0, 3)).'('.$hobby[4].')';
     }
-
-    $family_name      = addslashes(htmlspecialchars($family_name, ENT_QUOTES));
-    $given_name       = addslashes(htmlspecialchars($given_name, ENT_QUOTES));
-    $sex              = addslashes(htmlspecialchars($sex, ENT_QUOTES));
-    $postalcode_view  = addslashes(htmlspecialchars($postalcode_view, ENT_QUOTES));
-    $prefecture       = addslashes(htmlspecialchars($prefecture, ENT_QUOTES));
-    $email            = addslashes(htmlspecialchars($email, ENT_QUOTES));
-    $comment          = addslashes(htmlspecialchars($comment, ENT_QUOTES));
-    $hobby_view       = addslashes(htmlspecialchars($hobby_view, ENT_QUOTES));
-
     unset($_SESSION['errormsg']);
 }
 

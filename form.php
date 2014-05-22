@@ -69,15 +69,12 @@ if (isset($_SESSION['hobby'])) {
     }
 }
 
-foreach ($_SESSION as $key => $value) {
-    if (is_array($value)) {
-        foreach ($value as $key_array => $value_array) {
-            $_SESSION[$key][$key_array] = addslashes(htmlspecialchars($value[$key_array], ENT_QUOTES));
-        }
-    } else {
-        $_SESSION[$key] = addslashes(htmlspecialchars($value, ENT_QUOTES));
-    }
+/*
+function outputForHtml($param) {
+    if (empty($param)) return false;
+    print htmlspecialchars($param, ENT_QUOTES);
 }
+*/
 
 ?>
 
@@ -100,8 +97,8 @@ foreach ($_SESSION as $key => $value) {
         <legend>フォーム</legend>
   
         <p>
-          <label>姓：</label><input type="text" name="family_name" size="20" value='<?php if (isset($_SESSION['family_name'])) print $_SESSION['family_name']; ?>'>
-          <label>名：</label><input type="text" name="given_name" size="20" value='<?php if (isset($_SESSION['given_name'])) print $_SESSION['given_name']; ?>'>
+          <label>姓：</label><input type="text" name="family_name" size="20" value='<?php if (isset($_SESSION['family_name'])) print htmlspecialchars($_SESSION['family_name']); ?>'>
+          <label>名：</label><input type="text" name="given_name" size="20" value='<?php if (isset($_SESSION['given_name'])) print htmlspecialchars($_SESSION['given_name']); ?>'>
         </p>
 
         <p>
@@ -112,14 +109,14 @@ foreach ($_SESSION as $key => $value) {
           </ul>
         </p>
 
-        <p><label>郵便番号：</label><input type="text" name="postalcode[zone]" size="10" maxlength="3" value='<?php if (isset($_SESSION['postalcode'])) print $_SESSION['postalcode']['zone']; ?>'>-<input type="text" name="postalcode[district]" size="10" maxlength="4" value='<?php if (isset($_SESSION['postalcode'])) print $_SESSION['postalcode']['district']; ?>'></p>
+        <p><label>郵便番号：</label><input type="text" name="postalcode[zone]" size="10" maxlength="3" value='<?php if (isset($_SESSION['postalcode'])) print htmlspecialchars($_SESSION['postalcode']['zone']); ?>'>-<input type="text" name="postalcode[district]" size="10" maxlength="4" value='<?php if (isset($_SESSION['postalcode'])) print htmlspecialchars($_SESSION['postalcode']['district']); ?>'></p>
 
         <p>
           <label>都道府県：</label>
           <?php echo $menu_tag; ?>
         </p>
 
-        <p><label>メールアドレス：</label><input type="email" name="email" size="30" maxlength="40" value='<?php if (isset($_SESSION['email'])) print $_SESSION['email']; ?>'></p>
+        <p><label>メールアドレス：</label><input type="email" name="email" size="30" maxlength="40" value='<?php if (isset($_SESSION['email'])) print htmlspecialchars($_SESSION['email']); ?>'></p>
 
         <p>
           <label>趣味はなんですか：</label>
@@ -129,10 +126,10 @@ foreach ($_SESSION as $key => $value) {
           <input type="checkbox" name="hobby[2]" value='映画鑑賞' <?php if (isset($hobby_checked[2])) print $hobby_checked[2]; ?>>映画鑑賞
           <input type="hidden" name="hobby[3]" value=''>
           <input type="checkbox" name="hobby[3]" value='その他：' <?php if (isset($hobby_checked[3])) print $hobby_checked[3]; ?>>その他
-          <input type="text" name="hobby[4]" size="10" maxlength="15" value='<?php if (isset($_SESSION['hobby'][4])) print $_SESSION['hobby'][4]; ?>'>
+          <input type="text" name="hobby[4]" size="10" maxlength="15" value='<?php if (isset($_SESSION['hobby'][4])) print htmlspecialchars($_SESSION['hobby'][4]); ?>'>
         </p>
 
-        <p><label>ご意見：</label><textarea name="comment" cols="20" rows="2" maxlength="40"><?php if (isset($_SESSION['comment'])) print $_SESSION['comment']; ?></textarea></p>
+        <p><label>ご意見：</label><textarea name="comment" cols="20" rows="2" maxlength="40"><?php if (isset($_SESSION['comment'])) print htmlspecialchars($_SESSION['comment']); ?></textarea></p>
 
         <p><input type="submit" value="確認" formaction="confirm.php"></p>
       </fieldset>

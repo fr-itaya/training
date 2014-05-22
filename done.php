@@ -13,7 +13,7 @@
 
   <section>
     <p>応募しました</p>
-    <a href="index.html">TOPページへ</a>
+    <a href="index.php">TOPページへ</a>
   </section>
 
   <footer>

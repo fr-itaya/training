@@ -69,6 +69,7 @@ if (!empty($hobby[3]) && empty($hobby[4])) {
 } elseif (empty($hobby[3]) && !empty($hobby[4])) {
     $formData['hobby'][3] = 'その他：';
 }
+/*
 #特殊文字エスケープ
 foreach ($formData as $key => $value) {
     if (is_array($value)) {
@@ -80,6 +81,13 @@ foreach ($formData as $key => $value) {
 //変数である場合
         $formData[$key] = addslashes(htmlspecialchars($value, ENT_QUOTES));
     }
+}
+*/
+
+#関数でサニタイジング(出力直前に使用)
+function outputForHtml($param){
+    if (empty($param)) return false;
+    print htmlspecialchars($param, ENT_QUOTES);
 }
 
 #入力データをセッション変数に格納
@@ -127,56 +135,56 @@ if (!empty($errormsg)) {
         <tr>
           <th>姓</th>
           <td>
-          <?php print $family_name; ?>
+          <?php outputForHtml($formData['family_name']); ?>
           </td>
         </tr>
 
         <tr>
           <th>名</th>
           <td>
-          <?php print $given_name; ?>
+          <?php outputForHtml($formData['given_name']); ?>
           </td>
         </tr>
 
         <tr>
           <th>性別</th>
           <td>
-          <?php print $sex; ?>
+          <?php outputForHtml($formData['sex']); ?>
           </td>
         </tr>
 
         <tr>
           <th>郵便番号</th>
           <td>
-          <?php print $postalcode_view; ?>
+          <?php outputForHtml($postalcode_view); ?>
           </td>
         </tr>
 
         <tr>
           <th>都道府県</th>
           <td>
-          <?php print $prefecture; ?>
+          <?php outputForHtml($formData['prefecture']); ?>
           </td>
         </tr>
 
         <tr>
           <th>メールアドレス</th>
           <td>
-          <?php print $email; ?>
+          <?php outputForHtml($formData['email']); ?>
           </td>
         </tr>
 
         <tr>
           <th>趣味</th>
           <td>
-          <?php print $hobby_view; ?> 
+          <?php outputForHtml($hobby_view); ?> 
           </td>
         </tr>
 
         <tr>
           <th>ご意見</th>
           <td>
-          <?php print $comment; ?>
+          <?php outputForHtml($formData['comment']); ?>
           </td>
         </tr>
       </table>

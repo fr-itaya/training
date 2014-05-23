@@ -1,20 +1,26 @@
+<?php
+//セッション管理
+session_start();
+//セッション初期化
+$_SESSION = array();
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <title>ご応募ありがとうございました</title>
+  <title>issue #12</title>
   <meta charset="utf-8">
   <link href="style.css" rel="stylesheet" type="text/css" media="all">
 </head>
 
 <body>
   <header>
-    <h1>フォーム>完了</h1>
+    <h1>フォーム>TOPページ</h1>
   </header>
 
-  <section>
-    <p>応募しました</p>
-    <a href="index.html">TOPページへ</a>
-  </section>
+  <nav>
+    <a href="form.php">フォームを入力する</a>
+  </nav>
 
   <footer>
     <p>Copyright 2014</p>

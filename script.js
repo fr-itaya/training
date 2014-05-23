@@ -1,5 +1,5 @@
 var msg = "Hello, World!";
 
 $(function() {
-    alert(msg);
+  alert(msg);
 });

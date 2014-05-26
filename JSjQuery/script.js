@@ -1,8 +1,6 @@
-//#47 課題2
+//#47 課題3
 
-function greet(msg) {
+(function(msg) {
   var msg;
   alert(msg);
-}
-
-greet("Hello, World!");
+})("Hello, World!");

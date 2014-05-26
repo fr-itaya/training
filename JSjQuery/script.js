@@ -1,5 +1,6 @@
-var msg = "Hello, World!";
+//#47 課題3
 
-$(function() {
+(function(msg) {
+  var msg;
   alert(msg);
-});
+})("Hello, World!");

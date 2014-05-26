@@ -1,8 +1,8 @@
 //#47 課題2
 
 function greet(msg) {
-  var msg = "Hello World!";
+  var msg;
   alert(msg);
 }
 
-greet();
+greet("Hello, World!");

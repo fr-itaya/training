@@ -7,7 +7,7 @@
 */
 
 $(function() {
-  $('header').children().css('font-size', '30px');
+  $('h1').css('font-size', '30px');
   $('#msg').append('<p class="sample">サンプル2です。</p>');
   $('footer').text('Copyright 2013');
 });

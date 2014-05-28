@@ -18,10 +18,10 @@ $(function() {
 $(function() {
   $('form').submit(
     function() {
-      var str = ':text[name="val"]';
-      if ($(str).val() === '') {
+      var str = $('input[name="val"]').val();
+      if (str === '') {
         alert('入力してください');
-      } else if ($(str).val().match(/^[0-9]+$/)) {
+      } else if (str.match(/^[0-9]+$/)) {
         alert('数字です');
       } else {
         alert('数字以外です');

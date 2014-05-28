@@ -14,6 +14,20 @@ $(function() {
   });
 });
 
+//submitされた時に入力値チェック
+$(function() {
+  $('form').submit(
+    function() {
+      var str = ':text[name="val"]';
+      if ($(str).val() === '') {
+        alert('入力してください');
+      } else if ($(str).val().match(/^[0-9]+$/)) {
+        alert('数字です');
+      } else {
+        alert('数字以外です');
+      }
+    });
+});
 
 //#49 クリックイベント
 /*

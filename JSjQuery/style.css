@@ -4,7 +4,7 @@ h1 {
   font-family: 'Audiowide', cursive;
 }
 
-table{
+table {
   font-size: 20px;
   font-family: 'Audiowide', cursive;
   margin: 10px;
@@ -13,7 +13,7 @@ table{
   border-spacing: 0px 1px;
 }
 
-table th{
+table th {
   padding: 12px;
   vertical-align: middle;
   text-align: left;
@@ -24,7 +24,7 @@ table th{
   background: #447791;
 }
 
-table td{
+table td {
   padding: 12px;
   vertical-align: left;
   border-bottom: #999 1px solid;

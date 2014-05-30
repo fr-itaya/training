@@ -4,22 +4,22 @@ $.fn.loadTable = function() {
 }
 //表作成
 function getLanguage(data) {
+  var createRow, createTable;
   $(data.languages).each(function() {
-    var createTable = '<tr>'    +
+    createRow    ='<tr>'    +
                       '<th>'    + this.id   + '</th>' +
                       '<td>'    + this.name + '</td>' +
                       '<td>'    + this.kana + '</td>' +
                       '</tr>';
-    $("table").append(createTable);
+    createTable  += createRow;
   });
+  $("table").append(createTable);
 };
 
 //表示とボタンによる繰り返し処理
 $(function() {
   $(this).loadTable();
-  $(function() {
-    $(':button').click(function() {
-      $(this).loadTable()
-    });
+  $(':button').click(function() {
+    $(this).loadTable()
   });
 });

@@ -1,7 +1,8 @@
-$(function() {
+//プチプラグイン化:JSONファイル読込&表形式HTML作成
+$.fn.loadTable = function() {
   $.getJSON("ajaxTest.json", getLanguage);
-});
-
+}
+//表作成
 function getLanguage(data) {
   $(data.languages).each(function() {
     var createTable = '<tr>'    +
@@ -12,9 +13,13 @@ function getLanguage(data) {
     $("table").append(createTable);
   });
 };
-/*
+
+//表示とボタンによる繰り返し処理
 $(function() {
-  $(':button').click(
-    getLanguage());
+  $(this).loadTable();
+  $(function() {
+    $(':button').click(function() {
+      $(this).loadTable()
+    });
+  });
 });
-*/

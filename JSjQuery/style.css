@@ -1,0 +1,40 @@
+@font-face {
+  font-family: 'Audiowide';
+  font-style: normal;
+  font-weight: 400;
+  src: url(http://themes.googleusercontent.com/static/fonts/audiowide/v2/8XtYtNKEyyZh481XVWfVOrO3LdcAZYWl9Si6vvxL-qU.woff) format('woff');
+}            
+
+h1 {
+  font-family: 'Audiowide', cursive;
+}
+
+table {
+  font-size: 20px;
+  font-family: 'Audiowide', cursive;
+  margin: 10px;
+  color: #fff;
+  border-collapse: separate;
+  border-spacing: 0px 1px;
+}
+
+table th {
+  padding: 12px;
+  vertical-align: middle;
+  text-align: left;
+  border-bottom: #999 1px solid;
+  width: 20px;
+  border-left: #fff 1px solid;
+  border-right: #999 1px solid;
+  background: #447791;
+}
+
+table td {
+  padding: 12px;
+  vertical-align: left;
+  border-bottom: #999 1px solid;
+  width: 128px;
+  border-left: #fff 1px solid;
+  border-right: #999 1px solid;
+  background: #5893b1;
+}

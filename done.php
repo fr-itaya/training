@@ -8,7 +8,10 @@ $user = 'root';
 $password = '';
 //値の受取確認用(後で消します)
 var_dump($_SESSION);
-
+//LIKE文ワイルドカードエスケープ(関数化)
+function escape_wildcard($s) {
+    return mb_ereg_replace('([_%#])', '#\1', $s);
+}
 //★データ追加(関数化)
 function insertData($pdo) {
     //prepareメソッドでSQL文を作成
@@ -19,12 +22,16 @@ function insertData($pdo) {
     switch (true) { 
         case !empty($_SESSION['family_name']): 
             $stmt->bindValue(':last_name',  $_SESSION['family_name'], PDO::PARAM_STR);
+            escape_wildcard($_SESSION['family_name']);
         case !empty($_SESSION['given_name']): 
             $stmt->bindValue(':first_name', $_SESSION['given_name'],  PDO::PARAM_STR);
+            escape_wildcard($_SESSION['given_name']);
         case !empty($_SESSION['email']): 
             $stmt->bindValue(':email',      $_SESSION['email'],       PDO::PARAM_STR);
+            escape_wildcard($_SESSION['email']);
         case !empty($_SESSION['pref_id']):
             $stmt->bindValue(':pref_id',    $_SESSION['pref_id'],     PDO::PARAM_INT);
+            escape_wildcard($_SESSION['pref_id']);
             break; 
     }
     $stmt->bindValue(':created_at', date('Y-m-d H:i:s'));
@@ -69,4 +76,3 @@ $dbh = null;
   </footer>
 </body>
 </html>
-

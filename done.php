@@ -13,25 +13,25 @@ function escape_wildcard($s) {
     return mb_ereg_replace('([_%#])', '#\1', $s);
 }
 //★データ追加(関数化)
-function insertData($pdo) {
+function insertData($pdo, $input) {
     //prepareメソッドでSQL文を作成
     $sql = 'INSERT INTO users (last_name, first_name, email, pref_id, created_at) 
                    VALUES(:last_name, :first_name, :email, :pref_id, :created_at)';
     $stmt = $pdo->prepare($sql);
     //変数名にパラメータバインド
     switch (true) { 
-        case !empty($_SESSION['family_name']): 
-            $stmt->bindValue(':last_name',  $_SESSION['family_name'], PDO::PARAM_STR);
-            escape_wildcard($_SESSION['family_name']);
-        case !empty($_SESSION['given_name']): 
-            $stmt->bindValue(':first_name', $_SESSION['given_name'],  PDO::PARAM_STR);
-            escape_wildcard($_SESSION['given_name']);
-        case !empty($_SESSION['email']): 
-            $stmt->bindValue(':email',      $_SESSION['email'],       PDO::PARAM_STR);
-            escape_wildcard($_SESSION['email']);
-        case !empty($_SESSION['pref_id']):
-            $stmt->bindValue(':pref_id',    $_SESSION['pref_id'],     PDO::PARAM_INT);
-            escape_wildcard($_SESSION['pref_id']);
+        case !empty($input['family_name']): 
+            $stmt->bindValue(':last_name',  $input['family_name'], PDO::PARAM_STR);
+            escape_wildcard($input['family_name']);
+        case !empty($input['given_name']): 
+            $stmt->bindValue(':first_name', $input['given_name'],  PDO::PARAM_STR);
+            escape_wildcard($input['given_name']);
+        case !empty($input['email']): 
+            $stmt->bindValue(':email',      $input['email'],       PDO::PARAM_STR);
+            escape_wildcard($input['email']);
+        case !empty($input['pref_id']):
+            $stmt->bindValue(':pref_id',    $input['pref_id'],     PDO::PARAM_INT);
+            escape_wildcard($input['pref_id']);
             break; 
     }
     $stmt->bindValue(':created_at', date('Y-m-d H:i:s'));
@@ -42,7 +42,7 @@ function insertData($pdo) {
 try {
     //接続成功した時にオブジェクト作成
     $dbh = new PDO($dsn, $user, $password);
-    insertData($dbh);
+    insertData($dbh, $_SESSION);
 } catch (PDOException $e) {
     //接続＼失敗！／した時の例外処理:エラー文言を表示
     print('Connection failed:'.$e->getMessage());
@@ -76,3 +76,4 @@ $dbh = null;
   </footer>
 </body>
 </html>
+

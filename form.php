@@ -50,20 +50,13 @@ function GetSelectBoxTag($prefecture_array, $prefecture_name, $prefecture_sel_va
     return $menu_tag;
 }
 
-
-//都道府県リスト
-//$menu_array = array('--','北海道','青森県','岩手県','宮城県','秋田県','山形県','福島県','茨城県','栃木県','群馬県','埼玉県','千葉県','東京都','神奈川県','山梨県','長野県','新潟県','富山県','石川県','福井県','岐阜県','静岡県','愛知県','三重県','滋賀県','京都府','大阪府','兵庫県','奈良県','和歌山県','鳥取県','島根県','岡山県','広島県','山口県','徳島県','香川県','愛媛県','高知県','福岡県','佐賀県','長崎県','熊本県','大分県','宮崎県','鹿児島県','沖縄県');
 //都道府県リストをDBから取得
 $stmt = $pdo->query('SELECT * FROM prefectures');
 $pref_none = array('--');
 $pref_rows = $stmt->fetchAll(PDO::FETCH_COLUMN, 1);
-//var_dump($pref_rows);
 $menu_array = array_merge($pref_none, $pref_rows);
-//var_dump($menu_array);
 //メニューの名前
 $menu_name = 'prefecture';
-//セレクトボックス入力値保持用
-//$trans = '';
 
 //選択状態にするvalue値
 if (empty($_SESSION['prefecture'])) {
@@ -96,12 +89,6 @@ if (isset($_SESSION['hobby'])) {
     }
 }
 
-/*
-function outputForHtml($param) {
-    if (empty($param)) return false;
-    print htmlspecialchars($param, ENT_QUOTES);
-}
-*/
 //DB切断
 $pdo = null;
 ?>

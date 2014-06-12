@@ -6,8 +6,7 @@ session_start();
 $dsn = 'mysql:dbname=mysql_test; host=localhost; charset=utf8;';
 $user = 'root';
 $password = '';
-//値の受取確認用(後で消します)
-//var_dump($_SESSION);
+
 //LIKE文ワイルドカードエスケープ(関数化)
 function escape_wildcard($s) {
     return mb_ereg_replace('([_%#])', '#\1', $s);

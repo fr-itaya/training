@@ -10,7 +10,7 @@ $password = '';
 try {
     $dbh = new PDO($dsn, $user, $password);
 } catch (PDOException $e) {
-     //接続＼失敗！／した時の例外処理:エラー文言を表示
+     //接続失敗した時の例外処理:エラー文言を表示
     print('Connection failed:'.$e->getMessage());
     var_dump(method_exists('PDO', 'dsn'));
     die(); 
@@ -125,10 +125,6 @@ if (!empty($errormsg)) {
 
 //DB切断
 $dbh = null;
-/*都道府県欄の入力値確認用
-var_dump($_SESSION['prefecture']);
-var_dump($prefecture_view);
- */
 ?>
 
 

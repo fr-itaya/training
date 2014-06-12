@@ -2,12 +2,26 @@
 //セッション管理
 session_start();
 
+//DB接続
+$dsn = 'mysql:dbname=mysql_test; host=localhost; charset=utf8;';
+$user = 'root';
+$password = '';
+
+try {
+    $pdo = new PDO($dsn, $user, $password);
+} catch (PDOException $e) {
+    //接続失敗した時の例外処理:エラー文言を表示
+    print('Connection failed:'.$e->getMessage());
+    var_dump(method_exists('PDO', 'dsn'));
+    die();
+}
+
 $errormsg = array();
 if (!empty($_SESSION['errormsg'])) {
     $errormsg = $_SESSION['errormsg'];
 }
 
-//エラーがある場合はエラー文言を表示
+//入力値にエラーがある場合はエラー文言を表示
 if (!empty($errormsg)) {
     $count_errormsg = count($errormsg);
     for ($i = 0; $i < $count_errormsg; $i++) {
@@ -26,7 +40,7 @@ function GetSelectBoxTag($prefecture_array, $prefecture_name, $prefecture_sel_va
 
     $menu_tag .= '<select name="' . $prefecture_name . '">';
     foreach ($prefecture_array as $key => $value) {
-        $menu_tag .= '<option value="' . $value . '"';
+        $menu_tag .= '<option value="' . $key . '"';
         //選択状態にするか調べる
         if ($key==$prefecture_sel_value) $menu_tag .= ' selected';
         $menu_tag .= '>' . $value . '</option>';
@@ -36,21 +50,20 @@ function GetSelectBoxTag($prefecture_array, $prefecture_name, $prefecture_sel_va
     return $menu_tag;
 }
 
-
-//都道府県リスト
-$menu_array = array('--','北海道','青森県','岩手県','宮城県','秋田県','山形県','福島県','茨城県','栃木県','群馬県','埼玉県','千葉県','東京都','神奈川県','山梨県','長野県','新潟県','富山県','石川県','福井県','岐阜県','静岡県','愛知県','三重県','滋賀県','京都府','大阪府','兵庫県','奈良県','和歌山県','鳥取県','島根県','岡山県','広島県','山口県','徳島県','香川県','愛媛県','高知県','福岡県','佐賀県','長崎県','熊本県','大分県','宮崎県','鹿児島県','沖縄県');
-
+//都道府県リストをDBから取得
+$stmt = $pdo->query('SELECT * FROM prefectures');
+$pref_none = array('--');
+$pref_rows = $stmt->fetchAll(PDO::FETCH_COLUMN, 1);
+$menu_array = array_merge($pref_none, $pref_rows);
 //メニューの名前
 $menu_name = 'prefecture';
-//セレクトボックス入力値保持用
-$trans = '';
 
 //選択状態にするvalue値
 if (empty($_SESSION['prefecture'])) {
     $sel_value = 0; //初期値は「--」
 }else{
-    $trans = array_flip($menu_array);
-    $sel_value = $trans[$_SESSION['prefecture']]; //選択した都道府県
+//    $trans = array_flip($menu_array);
+    $sel_value = /*$trans[*/$_SESSION['prefecture'];//]; //選択した都道府県
 }
 
 //セレクトボックス作成関数呼び出し
@@ -64,7 +77,7 @@ if (isset($_SESSION['sex']) && ($_SESSION['sex'] == '男性')) {
     $sex_checked[1] = 'checked';
 }
 
-//セレクトボタン入力値保持
+//チェックボックス入力値保持
 $hobby_checked = array();
 if (isset($_SESSION['hobby'])) {
     foreach (array_slice($_SESSION['hobby'], 0, 3, TRUE) as $key => $value) {
@@ -76,13 +89,8 @@ if (isset($_SESSION['hobby'])) {
     }
 }
 
-/*
-function outputForHtml($param) {
-    if (empty($param)) return false;
-    print htmlspecialchars($param, ENT_QUOTES);
-}
-*/
-
+//DB切断
+$pdo = null;
 ?>
 
 <!DOCTYPE html>

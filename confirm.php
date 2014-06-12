@@ -2,6 +2,19 @@
 //セッション管理
 session_start();
 
+//DB接続
+$dsn = 'mysql:dbname=mysql_test; host=localhost; charset=utf8;';
+$user = 'root';
+$password = '';
+
+try {
+    $dbh = new PDO($dsn, $user, $password);
+} catch (PDOException $e) {
+     //接続＼失敗！／した時の例外処理:エラー文言を表示
+    print('Connection failed:'.$e->getMessage());
+    var_dump(method_exists('PDO', 'dsn'));
+    die(); 
+} 
 //空白処理用にPOSTデータを配列に格納
 $formData = array();
 //空白処理
@@ -17,12 +30,23 @@ foreach ($_POST as $key => $value) {
     }
 }
 
+#都道府県表示用関数
+function outputPref ($pdo, $input) {
+    $sql = 'SELECT pref_name FROM prefectures WHERE pref_id = :prefecture';
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindValue(':prefecture', $input, PDO:: PARAM_INT);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_COLUMN);
+    return $result;
+}
+
 $family_name     = $formData['family_name'];
 $given_name      = $formData['given_name'];
 $sex             = $formData['sex'];
 $postalcode      = $formData['postalcode'];
 $postalcode_view = implode('-', $postalcode);
 $prefecture      = $formData['prefecture'];
+$prefecture_view = outputPref($dbh, $prefecture);
 $email           = $formData['email'];
 $comment         = $formData['comment'];
 $hobby           = $formData['hobby'];
@@ -69,20 +93,6 @@ if (!empty($hobby[3]) && empty($hobby[4])) {
 } elseif (empty($hobby[3]) && !empty($hobby[4])) {
     $formData['hobby'][3] = 'その他：';
 }
-/*
-#特殊文字エスケープ
-foreach ($formData as $key => $value) {
-    if (is_array($value)) {
-//配列である場合
-        foreach ($value as $key_array => $value_array) {
-            $formData[$key][$key_array] = addslashes(htmlspecialchars($value[$key_array], ENT_QUOTES));
-        }
-    } else {
-//変数である場合
-        $formData[$key] = addslashes(htmlspecialchars($value, ENT_QUOTES));
-    }
-}
-*/
 
 #関数でサニタイジング(出力直前に使用)
 function outputForHtml($param){
@@ -113,7 +123,14 @@ if (!empty($errormsg)) {
     unset($_SESSION['errormsg']);
 }
 
+//DB切断
+$dbh = null;
+/*都道府県欄の入力値確認用
+var_dump($_SESSION['prefecture']);
+var_dump($prefecture_view);
+ */
 ?>
+
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -163,7 +180,7 @@ if (!empty($errormsg)) {
         <tr>
           <th>都道府県</th>
           <td>
-          <?php outputForHtml($formData['prefecture']); ?>
+          <?php outputForHtml($prefecture_view); ?>
           </td>
         </tr>
 

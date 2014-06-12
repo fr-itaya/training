@@ -7,7 +7,7 @@ $dsn = 'mysql:dbname=mysql_test; host=localhost; charset=utf8;';
 $user = 'root';
 $password = '';
 //値の受取確認用(後で消します)
-var_dump($_SESSION);
+//var_dump($_SESSION);
 //LIKE文ワイルドカードエスケープ(関数化)
 function escape_wildcard($s) {
     return mb_ereg_replace('([_%#])', '#\1', $s);
@@ -30,8 +30,8 @@ function insertData($pdo, $input) {
             $stmt->bindValue(':email',      $input['email'],       PDO::PARAM_STR);
             escape_wildcard($input['email']);
         case !empty($input['pref_id']):
-            $stmt->bindValue(':pref_id',    $input['pref_id'],     PDO::PARAM_INT);
-            escape_wildcard($input['pref_id']);
+            $stmt->bindValue(':pref_id',    $input['prefecture'],     PDO::PARAM_INT);
+            escape_wildcard($input['prefecture']);
             break; 
     }
     $stmt->bindValue(':created_at', date('Y-m-d H:i:s'));

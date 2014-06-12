@@ -26,7 +26,7 @@ function GetSelectBoxTag($prefecture_array, $prefecture_name, $prefecture_sel_va
 
     $menu_tag .= '<select name="' . $prefecture_name . '">';
     foreach ($prefecture_array as $key => $value) {
-        $menu_tag .= '<option value="' . $value . '"';
+        $menu_tag .= '<option value="' . $key . '"';
         //選択状態にするか調べる
         if ($key==$prefecture_sel_value) $menu_tag .= ' selected';
         $menu_tag .= '>' . $value . '</option>';
@@ -49,8 +49,8 @@ $trans = '';
 if (empty($_SESSION['prefecture'])) {
     $sel_value = 0; //初期値は「--」
 }else{
-    $trans = array_flip($menu_array);
-    $sel_value = $trans[$_SESSION['prefecture']]; //選択した都道府県
+//    $trans = array_flip($menu_array);
+    $sel_value = /*$trans[*/$_SESSION['prefecture'];//]; //選択した都道府県
 }
 
 //セレクトボックス作成関数呼び出し

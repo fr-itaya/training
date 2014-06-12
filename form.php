@@ -64,7 +64,7 @@ if (isset($_SESSION['sex']) && ($_SESSION['sex'] == '男性')) {
     $sex_checked[1] = 'checked';
 }
 
-//セレクトボタン入力値保持
+//チェックボックス入力値保持
 $hobby_checked = array();
 if (isset($_SESSION['hobby'])) {
     foreach (array_slice($_SESSION['hobby'], 0, 3, TRUE) as $key => $value) {

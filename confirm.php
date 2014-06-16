@@ -2,19 +2,8 @@
 //セッション管理
 session_start();
 
-//DB接続
-$dsn = 'mysql:dbname=mysql_test; host=localhost; charset=utf8;';
-$user = 'root';
-$password = '';
-
-try {
-    $dbh = new PDO($dsn, $user, $password);
-} catch (PDOException $e) {
-     //接続失敗した時の例外処理:エラー文言を表示
-    print('Connection failed:'.$e->getMessage());
-    var_dump(method_exists('PDO', 'dsn'));
-    die(); 
-} 
+//DB接続(外部化)
+require_once('db_connect.php');
 //空白処理用にPOSTデータを配列に格納
 $formData = array();
 //空白処理

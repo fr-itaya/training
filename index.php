@@ -27,4 +27,3 @@ $_SESSION = array();
   </footer>
 </body>
 </html>
-

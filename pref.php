@@ -37,4 +37,16 @@ if (empty($_SESSION['prefecture'])) {
 
 //セレクトボックス作成関数呼び出し
 $menu_tag = GetSelectBoxTag($menu_array, $menu_name, $sel_value);
+
+
+/*//都道府県表示関数
+function getPrefById ($pdo, $pref_id) {
+    $sql = 'SELECT pref_name FROM prefectures WHERE pref_id = :prefecture';
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindValue(':prefecture', $pref_id, PDO:: PARAM_INT);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_COLUMN);
+    return $result;
+}
+*/
 ?>

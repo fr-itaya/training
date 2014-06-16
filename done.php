@@ -1,11 +1,9 @@
 <?php
 //セッション変数使用
 session_start();
-//★DB接続
-//PDOクラスのオブジェクトを作成
-$dsn = 'mysql:dbname=mysql_test; host=localhost; charset=utf8;';
-$user = 'root';
-$password = '';
+
+//★DB接続(外部化)
+include_once('db_connect.php');
 
 //LIKE文ワイルドカードエスケープ(関数化)
 function escape_wildcard($s) {
@@ -38,41 +36,12 @@ function insertData($pdo, $input) {
     $stmt->execute();
 }
 
-try {
-    //接続成功した時にオブジェクト作成
-    $dbh = new PDO($dsn, $user, $password);
-    insertData($dbh, $_SESSION);
-} catch (PDOException $e) {
-    //接続＼失敗！／した時の例外処理:エラー文言を表示
-    print('Connection failed:'.$e->getMessage());
-    var_dump(method_exists('PDO', 'dsn'));
-    die(); 
-} 
+//データ追加関数呼び出し
+insertData($pdo, $_SESSION);
+
 //★DBとの接続を切る
-$dbh = null;
+$pdo = null;
+
+//HTML読込
+include_once('done.html.php');
 ?>
-
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <title>ご応募ありがとうございました</title>
-  <meta charset="utf-8">
-  <link href="style.css" rel="stylesheet" type="text/css" media="all">
-</head>
-
-<body>
-  <header>
-    <h1>フォーム>完了</h1>
-  </header>
-
-  <section>
-    <p>応募しました</p>
-    <a href="index.php">TOPページへ</a>
-  </section>
-
-  <footer>
-    <p>Copyright 2014</p>
-  </footer>
-</body>
-</html>
-

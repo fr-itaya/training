@@ -3,18 +3,7 @@
 session_start();
 
 //DB接続
-$dsn = 'mysql:dbname=mysql_test; host=localhost; charset=utf8;';
-$user = 'root';
-$password = '';
-
-try {
-    $pdo = new PDO($dsn, $user, $password);
-} catch (PDOException $e) {
-    //接続失敗した時の例外処理:エラー文言を表示
-    print('Connection failed:'.$e->getMessage());
-    var_dump(method_exists('PDO', 'dsn'));
-    die();
-}
+require_once('db_connect.php');
 
 $errormsg = array();
 if (!empty($_SESSION['errormsg'])) {
@@ -29,45 +18,8 @@ if (!empty($errormsg)) {
     }
 }
 
-//住所欄の都道府県セレクトボックスを生成
-function GetSelectBoxTag($prefecture_array, $prefecture_name, $prefecture_sel_value = '') {
-    $menu_tag = '';
-
-    //パラメータ値のチェック
-    if (!is_array($prefecture_array) || empty($prefecture_array) || empty($prefecture_name)) {
-        return $menu_tag;
-    }
-
-    $menu_tag .= '<select name="' . $prefecture_name . '">';
-    foreach ($prefecture_array as $key => $value) {
-        $menu_tag .= '<option value="' . $key . '"';
-        //選択状態にするか調べる
-        if ($key==$prefecture_sel_value) $menu_tag .= ' selected';
-        $menu_tag .= '>' . $value . '</option>';
-    }
-    $menu_tag .= '</select>';
-
-    return $menu_tag;
-}
-
-//都道府県リストをDBから取得
-$stmt = $pdo->query('SELECT * FROM prefectures');
-$pref_none = array('--');
-$pref_rows = $stmt->fetchAll(PDO::FETCH_COLUMN, 1);
-$menu_array = array_merge($pref_none, $pref_rows);
-//メニューの名前
-$menu_name = 'prefecture';
-
-//選択状態にするvalue値
-if (empty($_SESSION['prefecture'])) {
-    $sel_value = 0; //初期値は「--」
-}else{
-//    $trans = array_flip($menu_array);
-    $sel_value = /*$trans[*/$_SESSION['prefecture'];//]; //選択した都道府県
-}
-
-//セレクトボックス作成関数呼び出し
-$menu_tag = GetSelectBoxTag($menu_array, $menu_name, $sel_value);
+//住所欄の都道府県セレクトボックスを生成(外部化)
+include_once('pref.php');
 
 //ラジオボタン入力値保持
 $sex_checked = array();
@@ -91,68 +43,7 @@ if (isset($_SESSION['hobby'])) {
 
 //DB切断
 $pdo = null;
+
+//HTML読込
+include_once('form.html.php');
 ?>
-
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <title>フォーム</title>
-  <meta charset="utf-8">
-  <link href="style.css" rel="stylesheet" type="text/css" media="all">
-</head>
-
-<body>
-  <header>
-    <h1>フォーム>入力</h1>
-  </header>
-
-  <section>
-    <form action="confirm.php" method="post">
-      <fieldset name="form">
-        <legend>フォーム</legend>
-  
-        <p>
-          <label>姓：</label><input type="text" name="family_name" size="20" value='<?php if (isset($_SESSION['family_name'])) print htmlspecialchars($_SESSION['family_name']); ?>'>
-          <label>名：</label><input type="text" name="given_name" size="20" value='<?php if (isset($_SESSION['given_name'])) print htmlspecialchars($_SESSION['given_name']); ?>'>
-        </p>
-
-        <p>
-          <label>性別：</label>
-          <ul>
-            <li><input type="radio" name="sex" value='男性' <?php if (isset($sex_checked[0])) print $sex_checked[0]; ?>/>男性</li>
-            <li><input type="radio" name="sex" value='女性' <?php if (isset($sex_checked[1])) print $sex_checked[1]; ?>/>女性</li>
-          </ul>
-        </p>
-
-        <p><label>郵便番号：</label><input type="text" name="postalcode[zone]" size="10" maxlength="3" value='<?php if (isset($_SESSION['postalcode'])) print htmlspecialchars($_SESSION['postalcode']['zone']); ?>'>-<input type="text" name="postalcode[district]" size="10" maxlength="4" value='<?php if (isset($_SESSION['postalcode'])) print htmlspecialchars($_SESSION['postalcode']['district']); ?>'></p>
-
-        <p>
-          <label>都道府県：</label>
-          <?php echo $menu_tag; ?>
-        </p>
-
-        <p><label>メールアドレス：</label><input type="email" name="email" size="30" maxlength="40" value='<?php if (isset($_SESSION['email'])) print htmlspecialchars($_SESSION['email']); ?>'></p>
-
-        <p>
-          <label>趣味はなんですか：</label>
-          <input type="hidden" name="hobby[1]" value=''>
-          <input type="checkbox" name="hobby[1]" value='音楽鑑賞' <?php if (isset($hobby_checked[1])) print $hobby_checked[1]; ?>>音楽鑑賞
-          <input type="hidden" name="hobby[2]" value=''>
-          <input type="checkbox" name="hobby[2]" value='映画鑑賞' <?php if (isset($hobby_checked[2])) print $hobby_checked[2]; ?>>映画鑑賞
-          <input type="hidden" name="hobby[3]" value=''>
-          <input type="checkbox" name="hobby[3]" value='その他：' <?php if (isset($hobby_checked[3])) print $hobby_checked[3]; ?>>その他
-          <input type="text" name="hobby[4]" size="10" maxlength="15" value='<?php if (isset($_SESSION['hobby'][4])) print htmlspecialchars($_SESSION['hobby'][4]); ?>'>
-        </p>
-
-        <p><label>ご意見：</label><textarea name="comment" cols="20" rows="2" maxlength="40"><?php if (isset($_SESSION['comment'])) print htmlspecialchars($_SESSION['comment']); ?></textarea></p>
-
-        <p><input type="submit" value="確認" formaction="confirm.php"></p>
-      </fieldset>
-    </form>
-  </section>
-
-  <footer>
-     <p>&copy; 2014</p>
-  </footer>
-</body>
-</html>

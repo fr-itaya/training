@@ -1,6 +1,7 @@
 <?php
 //セッション変数使用
 session_start();
+
 //★DB接続(外部化)
 include_once('db_connect.php');
 
@@ -34,6 +35,9 @@ function insertData($pdo, $input) {
     //excecuteメソッドでSQL文をDBに発行
     $stmt->execute();
 }
+
+//データ追加関数呼び出し
+insertData($pdo, $_SESSION);
 
 //★DBとの接続を切る
 $pdo = null;

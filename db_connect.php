@@ -5,7 +5,7 @@ $user = 'root';
 $password = '';
 //接続成功した場合PDOインスタンス生成
 try {
-    $dbh = new PDO($dsn, $user, $password);
+    $pdo = new PDO($dsn, $user, $password);
 } catch (PDOException $e) {
     //接続失敗した時の例外処理:エラー文言を表示
     print('Connection failed:'.$e->getMessage());

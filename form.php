@@ -22,7 +22,7 @@ if (!empty($errormsg)) {
 include_once('pref.php');
 //create pref instance
 $pref = new Prefecture();
-$pref->GetSelectBoxTag();
+$pref->getSelectBoxTag();
 
 //ラジオボタン入力値保持
 $sex_checked = array();

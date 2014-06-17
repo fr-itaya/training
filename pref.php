@@ -35,7 +35,8 @@ class Prefecture {
 
     //都道府県表示メソッド
     public function getPrefById () {
-
+        //もしかして：プロパティpref_arrayを利用すれば一々DBから取得しなくても表示出来る
+        return $this->pref_array[$this->pref_id];
     }
 }//end of class
 
@@ -54,14 +55,14 @@ class Prefecture {
 
 
     //都道府県表示関数
-    public function getPrefById ($pdo, $pref_id) {
         /*
+    public function getPrefById ($pdo, $pref_id) {
         $sql = 'SELECT pref_name FROM prefectures WHERE pref_id = :prefecture';
         $stmt = $pdo->prepare($sql);
         $stmt->bindValue(':prefecture', $pref_id, PDO:: PARAM_INT);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_COLUMN);
         return $result;
-         */
     }
+         */
 ?>

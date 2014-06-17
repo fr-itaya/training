@@ -4,6 +4,7 @@ session_start();
 
 //DB接続(外部化)
 require_once('db_connect.php');
+
 //空白処理用にPOSTデータを配列に格納
 $formData = array();
 //空白処理
@@ -19,27 +20,22 @@ foreach ($_POST as $key => $value) {
     }
 }
 
-#都道府県表示用関数
-function getPrefById ($pdo, $pref_id) {
-    $sql = 'SELECT pref_name FROM prefectures WHERE pref_id = :prefecture';
-    $stmt = $pdo->prepare($sql);
-    $stmt->bindValue(':prefecture', $pref_id, PDO:: PARAM_INT);
-    $stmt->execute();
-    $result = $stmt->fetch(PDO::FETCH_COLUMN);
-    return $result;
-}
-
+//copy formData to var.
 $family_name     = $formData['family_name'];
 $given_name      = $formData['given_name'];
 $sex             = $formData['sex'];
 $postalcode      = $formData['postalcode'];
 $postalcode_view = implode('-', $postalcode);
 $prefecture      = $formData['prefecture'];
-$prefecture_view = getPrefById($pdo, $prefecture);
 $email           = $formData['email'];
 $comment         = $formData['comment'];
 $hobby           = $formData['hobby'];
 
+//create pref instance 
+$pref = new Prefecture();
+$prefecture_view = $pref->getPrefById();
+
+//varidate formData
 $errormsg = array();
 
 if (empty($family_name)) {

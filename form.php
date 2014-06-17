@@ -20,6 +20,9 @@ if (!empty($errormsg)) {
 
 //住所欄の都道府県セレクトボックスを生成(外部化)
 include_once('pref.php');
+//create pref instance
+$pref = new Prefecture();
+$pref->GetSelectBoxTag();
 
 //ラジオボタン入力値保持
 $sex_checked = array();

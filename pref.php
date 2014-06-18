@@ -1,14 +1,18 @@
 <?php
+//都道府県リストをDBから取得(この処理も削除？何処でやるべき？)
+$stmt = $pdo->query('SELECT * FROM prefectures');
+$pref_none  = array('--');
+$pref_rows  = $stmt->fetchAll(PDO::FETCH_COLUMN, 1);
+$pref_array = array_merge($pref_none, $pref_rows);
+
 class Prefecture {
     public $pref_array;
     public $pref_id;
 
-    public function __construct($pref_id) {
-        $pref_array = array();
-        //選択状態にするvalue値
-        if (empty($pref_id)) {
-            $pref_id = 0; //初期値は「--」
-        }else{
+    public function __construct($pref_id = 0, $pref_array) {
+        $this->pref_array = $pref_array;
+        //選択状態にするvalue値、初期値は「--」
+        if ($pref_id != 0) {
             $this->pref_id = $pref_id; //選択した都道府県
         }
     }
@@ -30,7 +34,8 @@ class Prefecture {
         }
         //selectタグ終了
         $menu_tag .= '</select>';
-        
+        global $pref_tag;
+        $pref_tag = $menu_tag;
     }
 
     //都道府県表示メソッド
@@ -39,30 +44,3 @@ class Prefecture {
         return $this->pref_array[$this->pref_id];
     }
 }//end of class
-
-    //都道府県リストをDBから取得(この処理も削除？何処でやるべき？)
-    /*
-    $stmt = $pdo->query('SELECT * FROM prefectures');
-    $pref_none = array('--');
-    $pref_rows = $stmt->fetchAll(PDO::FETCH_COLUMN, 1);
-    $menu_array = array_merge($pref_none, $pref_rows);
-     */
-    
-    //セレクトボックス作成関数呼び出し(不要？)
-    //$menu_tag = createSelectBoxTag($menu_array, $menu_name, $sel_value);
-
-
-
-
-    //都道府県表示関数
-        /*
-    public function getPrefById ($pdo, $pref_id) {
-        $sql = 'SELECT pref_name FROM prefectures WHERE pref_id = :prefecture';
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindValue(':prefecture', $pref_id, PDO:: PARAM_INT);
-        $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_COLUMN);
-        return $result;
-    }
-         */
-?>

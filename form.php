@@ -21,9 +21,10 @@ if (!empty($errormsg)) {
 //住所欄の都道府県セレクトボックスを生成(外部化)
 include_once('pref.php');
 //create pref instance
-$pref = new Prefecture();
-$pref->getSelectBoxTag();
-
+$pref = new Prefecture((isset($_SESSION['prefecture']) ? $_SESSION['prefecture'] : ''), $pref_array);
+//セレクトボックスタグ格納用
+$pref_tag= '';
+$pref->createSelectBoxTag($pref_tag);
 //ラジオボタン入力値保持
 $sex_checked = array();
 if (isset($_SESSION['sex']) && ($_SESSION['sex'] == '男性')) {

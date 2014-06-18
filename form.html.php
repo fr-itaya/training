@@ -33,7 +33,7 @@
 
         <p>
           <label>都道府県：</label>
-          <?php echo $menu_tag; ?>
+          <?php echo $pref_tag; ?>
         </p>
 
         <p><label>メールアドレス：</label><input type="email" name="email" size="30" maxlength="40" value='<?php if (isset($_SESSION['email'])) print htmlspecialchars($_SESSION['email']); ?>'></p>

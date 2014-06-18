@@ -32,7 +32,8 @@ $comment         = $formData['comment'];
 $hobby           = $formData['hobby'];
 
 //create pref instance 
-$pref = new Prefecture();
+require_once('pref.php');
+$pref = new Prefecture((isset($_SESSION['prefecture']) ? $_SESSION['prefecture'] : ''), $pref_array);
 $prefecture_view = $pref->getPrefById();
 
 //varidate formData

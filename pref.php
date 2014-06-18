@@ -1,15 +1,9 @@
 <?php
-//都道府県リストをDBから取得(この処理も削除？何処でやるべき？)
-$stmt = $pdo->query('SELECT * FROM prefectures');
-$pref_none  = array('--');
-$pref_rows  = $stmt->fetchAll(PDO::FETCH_COLUMN, 1);
-$pref_array = array_merge($pref_none, $pref_rows);
-
 class Prefecture {
-    public $pref_array;
-    public $pref_id;
+    private $pref_array;
+    private $pref_id;
 
-    public function __construct($pref_id = 0, $pref_array) {
+    public function __construct($pref_array, $pref_id = 0) {
         $this->pref_array = $pref_array;
         //選択状態にするvalue値、初期値は「--」
         if ($pref_id != 0) {
@@ -34,8 +28,7 @@ class Prefecture {
         }
         //selectタグ終了
         $menu_tag .= '</select>';
-        global $pref_tag;
-        $pref_tag = $menu_tag;
+        return print $menu_tag;
     }
 
     //都道府県表示メソッド

@@ -3,13 +3,13 @@ class Prefecture {
     public $pref_array;
     public $pref_id;
 
-    public function __construct($pref_selected) {
+    public function __construct($pref_id) {
         $pref_array = array();
         //選択状態にするvalue値
-        if (empty($pref_selected)) {
+        if (empty($pref_id)) {
             $pref_id = 0; //初期値は「--」
         }else{
-            $pref_id = $pref_selected; //選択した都道府県
+            $this->pref_id = $pref_id; //選択した都道府県
         }
     }
 
@@ -35,7 +35,7 @@ class Prefecture {
 
     //都道府県表示メソッド
     public function getPrefById () {
-        //もしかして：プロパティpref_arrayを利用すれば一々DBから取得しなくても表示出来る
+        //プロパティpref_arrayを利用して表示
         return $this->pref_array[$this->pref_id];
     }
 }//end of class

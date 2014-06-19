@@ -1,45 +1,45 @@
 <?php
-//セッション管理
-session_start();
-
 //DB接続(外部化)
 require_once('db_connect.php');
+//DBより都道府県リスト取得
+require_once('db_fetch_pref.php');
+require_once('pref.php');
+
+//セッション管理
+session_start();
 //空白処理用にPOSTデータを配列に格納
 $formData = array();
 //空白処理
 foreach ($_POST as $key => $value) {
     if (is_array($value)) {
-//配列である場合
+        //配列である場合
         foreach ($value as $key_array => $value_array) {
             $formData[$key][$key_array] = trim(mb_convert_kana($value[$key_array], 's', 'utf-8'));
         }
     } else {
-//変数である場合
+        //変数である場合
         $formData[$key] = trim(mb_convert_kana($value, 's', 'utf-8'));
     }
 }
 
-#都道府県表示用関数
-function getPrefById ($pdo, $pref_id) {
-    $sql = 'SELECT pref_name FROM prefectures WHERE pref_id = :prefecture';
-    $stmt = $pdo->prepare($sql);
-    $stmt->bindValue(':prefecture', $pref_id, PDO:: PARAM_INT);
-    $stmt->execute();
-    $result = $stmt->fetch(PDO::FETCH_COLUMN);
-    return $result;
-}
-
+//copy formData to var.
 $family_name     = $formData['family_name'];
 $given_name      = $formData['given_name'];
 $sex             = $formData['sex'];
 $postalcode      = $formData['postalcode'];
 $postalcode_view = implode('-', $postalcode);
 $prefecture      = $formData['prefecture'];
-$prefecture_view = getPrefById($pdo, $prefecture);
 $email           = $formData['email'];
 $comment         = $formData['comment'];
 $hobby           = $formData['hobby'];
 
+//DBより都道府県リスト取得
+$pref_array = fetchPref($pdo);
+//create pref instance 
+$pref = new Prefecture($pref_array, (isset($_SESSION['prefecture']) ? $_SESSION['prefecture'] : ''));
+$prefecture_view = $pref->getPrefById();
+
+//varidate formData
 $errormsg = array();
 
 if (empty($family_name)) {

@@ -5,6 +5,9 @@ require_once('db_connect.php');
 require_once('db_fetch_pref.php');
 require_once('pref.php');
 
+//create DB instance
+$db = new Database();
+$pdo = $db->connectToDB();
 //セッション管理
 session_start();
 //空白処理用にPOSTデータを配列に格納

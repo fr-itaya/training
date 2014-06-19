@@ -1,21 +1,23 @@
 <?php
-//セッション管理
-session_start();
-
 //DB接続(外部化)
 require_once('db_connect.php');
+//DBより都道府県リスト取得
+require_once('db_fetch_pref.php');
+require_once('pref.php');
 
+//セッション管理
+session_start();
 //空白処理用にPOSTデータを配列に格納
 $formData = array();
 //空白処理
 foreach ($_POST as $key => $value) {
     if (is_array($value)) {
-//配列である場合
+        //配列である場合
         foreach ($value as $key_array => $value_array) {
             $formData[$key][$key_array] = trim(mb_convert_kana($value[$key_array], 's', 'utf-8'));
         }
     } else {
-//変数である場合
+        //変数である場合
         $formData[$key] = trim(mb_convert_kana($value, 's', 'utf-8'));
     }
 }
@@ -31,9 +33,9 @@ $email           = $formData['email'];
 $comment         = $formData['comment'];
 $hobby           = $formData['hobby'];
 
+//DBより都道府県リスト取得
+$pref_array = fetchPref($pdo);
 //create pref instance 
-require_once('pref.php');
-include_once('db_fetch_pref.php');
 $pref = new Prefecture($pref_array, (isset($_SESSION['prefecture']) ? $_SESSION['prefecture'] : ''));
 $prefecture_view = $pref->getPrefById();
 

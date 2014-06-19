@@ -1,18 +1,18 @@
 <?php
-//セッション管理
-session_start();
-
 //DB接続
 require_once('db_connect.php');
 //都道府県リストをDBから取得
 include_once('db_fetch_pref.php');
+include_once('pref.php');
+//セッション管理
+session_start();
 
+//入力値にエラーがある場合はエラー文言を表示
 $errormsg = array();
 if (!empty($_SESSION['errormsg'])) {
     $errormsg = $_SESSION['errormsg'];
 }
 
-//入力値にエラーがある場合はエラー文言を表示
 if (!empty($errormsg)) {
     $count_errormsg = count($errormsg);
     for ($i = 0; $i < $count_errormsg; $i++) {
@@ -20,12 +20,11 @@ if (!empty($errormsg)) {
     }
 }
 
-//住所欄の都道府県セレクトボックスを生成(外部化)
-include_once('pref.php');
+//都道府県リストをDBから取得
+$pref_array = fetchPref($pdo);
 //create pref instance
 $pref = new Prefecture($pref_array, (isset($_SESSION['prefecture']) ? $_SESSION['prefecture'] : ''));
-//セレクトボックスタグ格納用
-$pref_tag= '';
+
 //ラジオボタン入力値保持
 $sex_checked = array();
 if (isset($_SESSION['sex']) && ($_SESSION['sex'] == '男性')) {

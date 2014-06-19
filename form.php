@@ -2,8 +2,8 @@
 //DB接続
 require_once('db_connect.php');
 //都道府県リストをDBから取得
-include_once('db_fetch_pref.php');
-include_once('pref.php');
+require_once('db_fetch_pref.php');
+require_once('pref.php');
 //セッション管理
 session_start();
 

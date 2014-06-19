@@ -6,13 +6,13 @@ class Prefecture {
     public function __construct($pref_array, $pref_id = 0) {
         $this->pref_array = $pref_array;
         //選択状態にするvalue値、初期値は「--」
-        if ($pref_id != 0) {
-            $this->pref_id = $pref_id; //選択した都道府県
-        }
+        $this->pref_id = $pref_id; //選択した都道府県
     }
 
     //都道府県セレクトボックス作成メソッド
-    public function createSelectBoxTag($menu_tag) {
+    public function createSelectBoxTag () {
+        //ローカル変数初期化
+        $menu_tag = '';
         //パラメータ値のチェック
         if (!is_array($this->pref_array) || empty($this->pref_array)) {
           return $menu_tag;
@@ -28,7 +28,7 @@ class Prefecture {
         }
         //selectタグ終了
         $menu_tag .= '</select>';
-        return print $menu_tag;
+        return $menu_tag;
     }
 
     //都道府県表示メソッド

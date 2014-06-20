@@ -6,8 +6,8 @@ require_once('db_fetch_pref.php');
 require_once('pref.php');
 
 //create DB instance
-$db = new Database();
-$pdo = $db->connectToDB();
+$db = new Database('mysql:dbname=mysql_test; host=localhost; charset=utf8;', 'root', '');
+$pdo = $db->getPdo();
 //セッション管理
 session_start();
 //空白処理用にPOSTデータを配列に格納

@@ -10,6 +10,10 @@ $db = new Database('mysql:dbname=mysql_test; host=localhost; charset=utf8;', 'ro
 $pdo = $db->getPdo();
 //セッション管理
 session_start();
+
+//DBより都道府県リスト取得
+$pref_array = fetchPref($pdo);
+
 //空白処理用にPOSTデータを配列に格納
 $formData = array();
 //空白処理
@@ -36,10 +40,9 @@ $email           = $formData['email'];
 $comment         = $formData['comment'];
 $hobby           = $formData['hobby'];
 
-//DBより都道府県リスト取得
-$pref_array = fetchPref($pdo);
-//create pref instance 
-$pref = new Prefecture($pref_array, (isset($_SESSION['prefecture']) ? $_SESSION['prefecture'] : ''));
+//create pref instance
+//初回でバリデーションエラー出さなかった時はPOSTの値を使ってインスタンス生成
+$pref = new Prefecture($pref_array, (isset($_POST['prefecture']) ? $_POST['prefecture'] : 0));
 $prefecture_view = $pref->getPrefById();
 
 //varidate formData

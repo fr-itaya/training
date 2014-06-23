@@ -1,10 +1,12 @@
 <?php
-//セッション変数使用
-session_start();
-
 //★DB接続(外部化)
 include_once('db_connect.php');
 
+//セッション変数使用
+session_start();
+//DBインスタンス作成・接続メソッド
+$db = new Database('mysql:dbname=mysql_test; host=localhost; charset=utf8;', 'root', '');
+$pdo = $db->getPdo();
 //LIKE文ワイルドカードエスケープ(関数化)
 function escape_wildcard($s) {
     return mb_ereg_replace('([_%#])', '#\1', $s);

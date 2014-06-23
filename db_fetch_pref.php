@@ -1,7 +1,5 @@
 <?php
 //都道府県リストをDBから取得
-//プロパティをprivateにしたことでconfirm.phpに影響が。
-//インスタンス化の引数にpref_arrayを使用出来なくなったのでやむなく…
 function fetchPref($pdo) {
     $pref_array = array();
     $stmt = $pdo->query('SELECT * FROM prefectures');

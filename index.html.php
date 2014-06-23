@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <title>issue #12</title>
+  <title>TOP</title>
   <meta charset="utf-8">
   <link href="style.css" rel="stylesheet" type="text/css" media="all">
 </head>
@@ -13,6 +13,7 @@
 
   <nav>
     <a href="form.php">フォームを入力する</a>
+    <a href="list.php">ユーザ一覧を見る</a>
   </nav>
 
   <footer>

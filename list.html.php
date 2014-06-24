@@ -15,24 +15,17 @@
     <table id="horizontal">
       <thead>
         <tr>
-          <th>名前</th>
-          <th>性別</th>
-          <th>郵便番号</th>
-          <th>都道府県</th>
+          <th>ID</th>
+          <th>姓</th>
+          <th>名</th>
           <th>メールアドレス</th>
-          <th>趣味</th>
+          <th>都道府県</th>
+          <th>登録日時</th>
+          <th>更新日時</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-        <!--SAMPLE-->
-          <td>佐藤和弥</td>
-          <td>男性</td>
-          <td>150-0036</td>
-          <td>東京都</td>
-          <td>sato@test.com</td>
-          <td>音楽鑑賞</td>
-        </tr>
+          <?php print $users; ?>
       </tbody>
     </table>
   </section>

@@ -1,13 +1,13 @@
 <?php
 //DB接続クラス
 class Database {
-    private $pdo;
+    private static $pdo;
 
-    public function __construct($dsn, $user, $password) {
-        $this->pdo = '';
+    private function __construct($dsn, $user, $password) {
+        self::$pdo = '';
         //接続成功した場合PDOインスタンス生成
         try {
-            $this->pdo = new PDO($dsn, $user, $password);
+            self::$pdo = new PDO($dsn, $user, $password);
         } catch (PDOException $e) {
             //接続失敗した時の例外処理:エラー文言を表示
             print('Connection failed:'.$e->getMessage());
@@ -16,8 +16,11 @@ class Database {
         }
     }
     
-    public function getPdo() {
-        return $this->pdo;
+    public static function getPdo() {
+        if (is_null(self::$pdo)) {
+            self::$pdo = new self;
+        }
+        return self::$pdo;
     }
 }
 ?>

@@ -7,7 +7,11 @@ require_once('pref.php');
 
 //create DB instance
 //$db = new Database('mysql:dbname=mysql_test; host=localhost; charset=utf8;', 'root', '');
-$pdo = Database::getPdo();
+$dsn = 'mysql:dbname=mysql_test; host=localhost; charset=utf8;';
+$user = 'root';
+$password = '';
+$pdo = Database::getInstance($dsn, $user, $password);
+
 //セッション管理
 session_start();
 

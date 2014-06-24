@@ -6,7 +6,10 @@ include_once('db_connect.php');
 session_start();
 //DBインスタンス作成・接続メソッド
 //db = new Database('mysql:dbname=mysql_test; host=localhost; charset=utf8;', 'root', '');
-$pdo = Database::getPdo();
+$dsn = 'mysql:dbname=mysql_test; host=localhost; charset=utf8;';
+$user = 'root';
+$password = '';
+$pdo = Database::getinstance($dsn, $user, $password);
 //LIKE文ワイルドカードエスケープ(関数化)
 function escape_wildcard($s) {
     return mb_ereg_replace('([_%#])', '#\1', $s);

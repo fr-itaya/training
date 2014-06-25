@@ -3,15 +3,9 @@
 class Database {
     private $pdo;
     private static $instance;
-    private $dsn;
-    private $user;
-    private $password;
 
     private function __construct($dsn, $user, $password) {
         $this->pdo = '';
-        $this->dsn = $dsn;
-        $this->user= $user;
-        $this->password = $password;
         //接続成功した場合PDOインスタンス生成
         try {
             $this->pdo = new PDO($dsn, $user, $password);
@@ -22,6 +16,7 @@ class Database {
             die();
         }
     }
+
     public static function getInstance($dsn, $user, $password) {
         if (is_null(self::$instance)) {
             self::$instance = new self($dsn, $user, $password);

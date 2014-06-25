@@ -3,6 +3,13 @@ require_once('db_connect.php');
 require_once('db_fetch_pref.php');
 require_once('pref.php');
 require_once('page_nav.php');
+
+$dsn = 'mysql:dbname=mysql_test; host=localhost; charset=utf8;';
+$user = 'root';
+$password = '';
+$db_instance = Database::getInstance($dsn, $user, $password);
+$pdo = $db_instance->getPdo();
+
 //ユーザ情報をDBから全取得
 function fetchUsers($pdo) {
     $stmt = $pdo->query('SELECT * FROM users');

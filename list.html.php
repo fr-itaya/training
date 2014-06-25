@@ -1,24 +1,3 @@
-<?php
-$user_data = '';
-$stmt = fetchUsers($pdo);
-//var_dump($stmt);
-while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-    $user_data .= '<tr>';
-    $pref->setPrefId($row['pref_id']);
-    $row['pref_id'] = $pref->getPrefById();
-    /*
-    print '<pre>';
-    var_dump($row);
-    print '</pre>';
-     */
-    foreach ($row as $val) {
-        $user_data .= '<td>' . $val . '</td>';
-    }
-    $user_data .= '</td>' . '</tr>';
-}
-
-?>
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -46,7 +25,13 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         </tr>
       </thead>
       <tbody>
-          <?php print $user_data; ?>
+      <?php foreach ($user_list as $user_row): ?>
+        <tr>
+        <?php foreach ($user_row as $val): ?>
+          <td><?php print $val ?></td>
+        <?php endforeach ?>
+        </tr>
+      <?php endforeach ?>
       </tbody>
     </table>
   </section>

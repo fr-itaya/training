@@ -10,7 +10,8 @@ require_once('pref.php');
 $dsn = 'mysql:dbname=mysql_test; host=localhost; charset=utf8;';
 $user = 'root';
 $password = '';
-$pdo = Database::getInstance($dsn, $user, $password);
+$db_instance = Database::getInstance($dsn, $user, $password);
+$pdo = $db_instance->getPdo();
 
 //セッション管理
 session_start();

@@ -9,7 +9,9 @@ session_start();
 $dsn = 'mysql:dbname=mysql_test; host=localhost; charset=utf8;';
 $user = 'root';
 $password = '';
-$pdo = Database::getinstance($dsn, $user, $password);
+$db_instance = Database::getinstance($dsn, $user, $password);
+$pdo = $db_instance->getPdo();
+
 //LIKE文ワイルドカードエスケープ(関数化)
 function escape_wildcard($s) {
     return mb_ereg_replace('([_%#])', '#\1', $s);

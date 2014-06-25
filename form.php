@@ -6,7 +6,8 @@ require_once('db_fetch_pref.php');
 require_once('pref.php');
 
 //$db = new Database('mysql:dbname=mysql_test; host=localhost;charset=utf8;', 'root', '');
-$pdo = Database::getInstance('mysql:dbname=mysql_test; host=localhost;charset=utf8;', 'root', '');
+$db_instance = Database::getInstance('mysql:dbname=mysql_test; host=localhost;charset=utf8;', 'root', '');
+$pdo = $db_instance->getPdo();
 
 //セッション管理
 session_start();

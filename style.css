@@ -14,6 +14,7 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+
 #horizontal {
   width: 800px;
   text-align: center;
@@ -33,4 +34,8 @@ table td {
 
 section p {
   font-weight: bold;
+}
+
+footer {
+  padding-top: 20px;
 }

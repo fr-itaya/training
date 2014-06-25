@@ -36,4 +36,9 @@ class Prefecture {
         //プロパティpref_arrayを利用して表示
         return $this->pref_array[$this->pref_id];
     }
+
+    //都道府県ID設定メソッド(一覧画面)
+    public function setPrefId ($pref_id) {
+        $this->pref_id = $pref_id;
+    }
 }//end of class

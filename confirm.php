@@ -6,8 +6,13 @@ require_once('db_fetch_pref.php');
 require_once('pref.php');
 
 //create DB instance
-$db = new Database('mysql:dbname=mysql_test; host=localhost; charset=utf8;', 'root', '');
-$pdo = $db->getPdo();
+//$db = new Database('mysql:dbname=mysql_test; host=localhost; charset=utf8;', 'root', '');
+$dsn = 'mysql:dbname=mysql_test; host=localhost; charset=utf8;';
+$user = 'root';
+$password = '';
+$db_instance = Database::getInstance($dsn, $user, $password);
+$pdo = $db_instance->getPdo();
+
 //セッション管理
 session_start();
 

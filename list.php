@@ -16,18 +16,30 @@ function fetchUsers($pdo) {
     $stmt = $pdo->query('SELECT * FROM users');
     return $stmt;
 }
-*/
+ */
 
+//現在のページをGETで取得
+if (!empty($_GET['page'])) {
+if (preg_match('/^[1-9][0-9]*$/', $_GET['page'])) {
+    $current_page = (int)$_GET['page'];
+    }
+} else {
+    $current_page = 1;
+}
+//ページリンク表示用
+$rowsParPage = 10;
 
 //ユーザ情報をDBから1頁分取得
-function fetchUsers($pdo) {
-    //動作確認用
-    $parOnePage = 10;
-    $current_page = 1;
-    $offset = $parOnePage * ($current_page - 1);
-    $stmt = $pdo->query("SELECT * FROM users LIMIT " .$offset. "," .$parOnePage.";");
+function fetchUsers($pdo, $current_page, $rowsParPage) {
+    $offset = $rowsParPage * ($current_page - 1);
+    $stmt = $pdo->query("SELECT * FROM users LIMIT " .$offset. "," .$rowsParPage. ";");
     return $stmt;
 }
+
+//前へ・次へボタン表示用にデータ総数と総ページ数を取得
+$total_users = $pdo->query('SELECT COUNT( * ) FROM users;')->fetch(PDO::FETCH_COLUMN);
+$total_pages = ceil($total_users / $rowsParPage);
+
 //DBから都道府県リストを取得
 $pref_array = fetchPref($pdo);
 //create pref instance
@@ -35,18 +47,14 @@ $pref = new Prefecture($pref_array);
 
 //取得したユーザ情報を1行ずつ配列に格納
 $user_list = array();
-$stmt = fetchUsers($pdo); 
+$stmt = fetchUsers($pdo, $current_page, $rowsParPage); 
 while ($user_row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     //都道府県IDを都道府県名に変換
     $pref->setPrefId($user_row['pref_id']);
     $user_row['pref_id'] = $pref->getPrefById();
     $user_list[] = $user_row;
 }
-/*
-print '<pre>';
-var_dump($user_list);
-print '</pre>';
- */     
+
 $pdo = null;
 
 //html

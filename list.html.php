@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-   <title>登録ユーザ一覧</title>
-   <meta charset="UTF-8">
-   <link href="style.css" rel="stylesheet" type="text/css" media="all">
+  <title>登録ユーザ一覧</title>
+  <meta charset="UTF-8">
+  <link href="style.css" rel="stylesheet" type="text/css" media="all">
 </head>
 
 <body>
@@ -37,16 +37,29 @@
   </section>
 
   <nav>
-  <!--SAMPLE-->
-  <ul class="pager">
-     <li><a href="">1...</a></li>
-     <li><a href="">prev</a></li>
-     <li><a href="">2</a></li>
-     <li><span class="current">3</span></li>
-     <li><a href="">4</a></li>
-     <li><a href="">next</a></li>
-     <li><a href="">...5</a></li>
-  </ul>
+    <!--SAMPLE-->
+    <ul class="pager">
+<!--      <li><a href="">1...</a></li>
+      <li><a href="">prev</a></li>
+      <li><a href="">2</a></li>
+      <li><span class="current">3</span></li>
+      <li><a href="">4</a></li>
+      <li><a href="">next</a></li>
+      <li><a href="">...5</a></li>-->
+      <?php if ($current_page > 1) : ?>
+      <li><a href="?page=<?php print $current_page - 1; ?>">prev</a></li>
+      <?php endif; ?>
+      <?php for ($i = 1; $i <= $total_pages; $i++) : ?>
+          <?php if ($current_page == $i) : ?>
+          <li><span class="current"><?php print $i; ?></span></li>
+          <?php else: ?>
+          <li><a href="?page=<?php print $i; ?>"><?php print $i; ?></a></li>
+          <?php endif; ?>
+      <?php endfor; ?>
+      <?php if ($current_page < $total_pages) : ?>
+      <li><a href="?page=<?php print $current_page + 1; ?>">next</a></li>
+      <?php endif ?>
+    </ul>
   </nav>
 
   <footer>

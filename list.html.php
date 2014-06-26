@@ -37,7 +37,16 @@
   </section>
 
   <nav>
-  <!--PENDING-->
+  <!--SAMPLE-->
+  <ul class="pager">
+     <li><a href="">1...</a></li>
+     <li><a href="">prev</a></li>
+     <li><a href="">2</a></li>
+     <li><span class="current">3</span></li>
+     <li><a href="">4</a></li>
+     <li><a href="">next</a></li>
+     <li><a href="">...5</a></li>
+  </ul>
   </nav>
 
   <footer>

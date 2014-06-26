@@ -1,3 +1,7 @@
+body {
+  color: #433;
+}
+
 header {
   margin:10px 0;
   font-size: 30px;
@@ -13,9 +17,10 @@ table {
   border: 1px #e3e3e3 solid;
   border-collapse: collapse;
   border-spacing: 0;
+  margin-bottom: 20px;
 }
 
-#horizontal {
+ #horizontal {
   width: 800px;
   text-align: center;
 }
@@ -34,6 +39,37 @@ table td {
 
 section p {
   font-weight: bold;
+}
+
+a {
+  color: rgba(255, 99, 71, 0.9);
+}
+
+ul.pager {
+  margin: 0 0 10px;
+  padding: 12px;
+  background: #f3f3f3;
+  text-align: center;
+}
+
+ul.pager li {
+  display: inline;
+  margin: 0 1px;
+  padding: 0;
+}
+
+ul.pager li span,
+ul.pager li a {
+  display: inline-block;
+  padding: 1px 8px;
+  background: #fff8dc;
+  border: 1px solid #ccc;
+  vertical-align: middle;
+  text-decoration: none;
+}
+
+ul.pager li a:hover {
+  background: #e3e3e3;
 }
 
 footer {

@@ -2,7 +2,7 @@
 require_once('db_connect.php');
 require_once('db_fetch_pref.php');
 require_once('pref.php');
-require_once('page_nav.php');
+//require_once('page_nav.php');
 
 $dsn = 'mysql:dbname=mysql_test; host=localhost; charset=utf8;';
 $user = 'root';
@@ -11,8 +11,21 @@ $db_instance = Database::getInstance($dsn, $user, $password);
 $pdo = $db_instance->getPdo();
 
 //ユーザ情報をDBから全取得
+/*
 function fetchUsers($pdo) {
     $stmt = $pdo->query('SELECT * FROM users');
+    return $stmt;
+}
+*/
+
+
+//ユーザ情報をDBから1頁分取得
+function fetchUsers($pdo) {
+    //動作確認用
+    $parOnePage = 10;
+    $current_page = 1;
+    $offset = $parOnePage * ($current_page - 1);
+    $stmt = $pdo->query("SELECT * FROM users LIMIT " .$offset. "," .$parOnePage.";");
     return $stmt;
 }
 //DBから都道府県リストを取得

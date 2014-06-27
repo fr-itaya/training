@@ -39,19 +39,19 @@
   <nav>
     <ul class="pager">
       <?php if ($current_page > 1) : ?>
-      <li><a href="?page=1">1...</a></li>
-      <li><a href="?page=<?php print $current_page - 1; ?>">prev</a></li>
+          <li><a href="?page=1">1...</a></li>
+          <li><a href="?page=<?php print $current_page - 1; ?>">prev</a></li>
       <?php endif; ?>
       <?php for ($i = 1; $i <= $total_pages; $i++) : ?>
           <?php if ($current_page == $i) : ?>
-          <li><span class="current"><?php print $i; ?></span></li>
-          <?php elseif ($current_page - 2 <= $i && $i <= $current_page + 2) : ?>
-          <li><a href="?page=<?php print $i; ?>"><?php print $i; ?></a></li>
+              <li><span class="current"><?php print $i; ?></span></li>
+          <?php elseif ($current_page - $max_pagelink <= $i && $i <= $current_page + $max_pagelink) : ?>
+              <li><a href="?page=<?php print $i; ?>"><?php print $i; ?></a></li>
           <?php endif; ?>
       <?php endfor; ?>
       <?php if ($current_page < $total_pages) : ?>
-      <li><a href="?page=<?php print $current_page + 1; ?>">next</a></li>
-      <li><a href="?page=<?php print $total_pages; ?>"><?php print "..." .$total_pages; ?></a></li>
+          <li><a href="?page=<?php print $current_page + 1; ?>">next</a></li>
+          <li><a href="?page=<?php print $total_pages; ?>"><?php print "..." . $total_pages; ?></a></li>
       <?php endif ?>
     </ul>
   </nav>

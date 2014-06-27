@@ -10,35 +10,31 @@ $password = '';
 $db_instance = Database::getInstance($dsn, $user, $password);
 $pdo = $db_instance->getPdo();
 
-//ユーザ情報をDBから全取得
-/*
-function fetchUsers($pdo) {
-    $stmt = $pdo->query('SELECT * FROM users');
-    return $stmt;
-}
- */
-
-//現在のページをGETで取得
-if (!empty($_GET['page'])) {
-if (preg_match('/^[1-9][0-9]*$/', $_GET['page'])) {
-    $current_page = (int)$_GET['page'];
-    }
-} else {
-    $current_page = 1;
-}
 //ページリンク表示用
 $rowsParPage = 10;
-
+//ページ番号の最大表示数
+$max_pagelink = 2;
 //ユーザ情報をDBから1頁分取得
 function fetchUsers($pdo, $current_page, $rowsParPage) {
     $offset = $rowsParPage * ($current_page - 1);
-    $stmt = $pdo->query("SELECT * FROM users LIMIT " .$offset. "," .$rowsParPage. ";");
+    $stmt = $pdo->query("SELECT * FROM users LIMIT " . $offset . "," . $rowsParPage . ";");
     return $stmt;
 }
 
 //前へ・次へボタン表示用にデータ総数と総ページ数を取得
 $total_users = $pdo->query('SELECT COUNT( * ) FROM users;')->fetch(PDO::FETCH_COLUMN);
 $total_pages = ceil($total_users / $rowsParPage);
+
+//現在のページをGETで取得
+if (!empty($_GET['page'])) {
+    if (preg_match('/^[1-9][0-9]*$/', $_GET['page'])) {
+        $current_page = ($_GET['page'] > $total_pages) ? 1 : (int)$_GET['page'];
+    } else {
+        $current_page = 1;
+    }
+} else {
+    $current_page = 1;
+}
 
 //DBから都道府県リストを取得
 $pref_array = fetchPref($pdo);

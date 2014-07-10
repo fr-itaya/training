@@ -11,10 +11,10 @@
     <h1>フォーム>完了</h1>
   </header>
 
-  <section>
+  <section class="main">
     <p>応募しました</p>
     <a href="index.php">TOPページへ</a>
-  </section>
+  </section><!--main-->
 
   <nav class="global">
     <h4>動作確認用</h4>

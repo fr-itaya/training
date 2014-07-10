@@ -3,7 +3,7 @@
 <head>
   <title>登録ユーザ一覧</title>
   <meta charset="UTF-8">
-  <link href="style.css" rel="stylesheet" type="text/css" media="all">
+  <link href="css/style.css" rel="stylesheet" type="text/css" media="all">
 </head>
 
 <body>
@@ -56,9 +56,21 @@
     </ul>
   </nav>
 
-  <footer>
+
+<nav class="global">
+  <h4>動作確認用</h4>
+  <ul>
+    <li><a href="index.php">TOP</a></li>
+    <li><a href="form.php">入力</a></li>
+    <li><a href="confirm.php">確認</a></li>
+    <li><a href="done.php">完了</a></li>
+    <li><span class="current">応募者一覧</span></li>
+  </ul>
+</nav>
+
+<footer>
     <a href="index.php">TOPへ戻る</a>
-    <p>Copyright 2014</p>
+    <p>&copy; 2014</p>
   </footer>
 </body>
 </html>

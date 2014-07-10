@@ -3,7 +3,7 @@
 <head>
   <title>TOP</title>
   <meta charset="utf-8">
-  <link href="style.css" rel="stylesheet" type="text/css" media="all">
+  <link href="css/style.css" rel="stylesheet" type="text/css" media="all">
 </head>
 
 <body>
@@ -11,13 +11,24 @@
     <h1>フォーム>TOPページ</h1>
   </header>
 
-  <nav>
+  <nav class="local top">
     <a href="form.php">フォームを入力する</a>
-    <a href="list.php">ユーザ一覧を見る</a>
+    <a href="list.php">応募者一覧を見る</a>
+  </nav>
+
+  <nav class="global">
+    <h4>動作確認用</h4>
+    <ul>
+      <li><span class="current">TOP</span></li>
+      <li><a href="form.php">入力</a></li>
+      <li><a href="confirm.php">確認</a></li>
+      <li><a href="done.php">完了</a></li>
+      <li><a href="list.php">応募者一覧</a></li>
+    </ul>
   </nav>
 
   <footer>
-    <p>Copyright 2014</p>
+    <p>&copy; 2014</p>
   </footer>
 </body>
 </html>

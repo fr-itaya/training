@@ -3,7 +3,7 @@
 <head>
   <title>確認画面</title>
   <meta charset="utf-8">
-  <link href="style.css" rel="stylesheet" type="text/css" media="all">
+  <link href="css/style.css" rel="stylesheet" type="text/css" media="all">
 </head>
 
 <body>
@@ -80,6 +80,17 @@
 
       <p><input type="submit" value="送信" formaction="done.php"></p>
     </form>
+  </nav>
+
+  <nav class="global">
+    <h4>動作確認用</h4>
+    <ul>
+      <li><a href="index.php">TOP</a></li>
+      <li><a href="form.php">入力</a></li>
+      <li><span class="current">確認</span></li>
+      <li><a href="done.php">完了</a></li>
+      <li><a href="list.php">応募者一覧</a></li>
+    </ul>
   </nav>
 
   <footer>

@@ -10,6 +10,12 @@ $sub_line: lighten($sub, 10%);
 $sub_text: lighten($sub, 25%);
 $error_bg: #AD4844;
 
+//width,height
+$list_width: 100%; 
+$sidebar_width: 20%;
+$main_margin: 10px;
+$main_width: 77.5%;
+
 /*全体の文字色*/
 body {
   @include default_fonts;
@@ -27,22 +33,44 @@ header {
   border-bottom: 1px solid $main_line;
 }
 
-/*main column*/
-.main {
-  margin: 10px;
+/*To equal height columns without heightLine.js*/
+.container_main {
   float: left;
+  width: 100%;
+  background: white;
+  position: relative;
+  right: 20%;
+}
+
+.container_sub {
+  float: left;
+  width: 100%;
+  background: $sub;
+  position: relative;
+  overflow: hidden;
+}
+/*main column*/
+
+.main {
+  margin: $main_margin;
+  float: left;
+  width: $main_width;
+  position: relative;
+  left: $sidebar_width;
 }
 
 a {
-  display: block; 
+  display: block;
   color: darken($sub, 15%);
 }
 
 /*form*/
 
 fieldset {
+  margin-top: - $main_margin;
   padding: 20px;
   border: 2px double $main_line;
+  border-radius: 5px;
   line-height: 2;
 }
 
@@ -54,9 +82,11 @@ label {
 /*errormsg*/
 
 .error {
+  margin-bottom: $main_margin;
   padding: 30px 10px;
   color: $main_text;
   background-color: $error_bg;
+  border-radius: 5px;
 }
 
 /*table*/
@@ -66,23 +96,28 @@ table {
   border: 1px #e3e3e3 solid;
   border-collapse: collapse;
   border-spacing: 0;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   padding: 10px;
-}
-  tr {
+
+tr {
     border: 1px #e3e3e3 solid;
     border-width: 0 1px 1px 1px;
   
     th {
+      border: 1px #e3e3e3 solid;
       background-color: #f5f5f5;
       text-align: center;
+      font-size: 0.95em;
     }
     td {
+      @extend th;
+      background-color: #FFF;
     }
   }
+}
 
 #horizontal {
-  width: 800px;
+  width: $list_width;
   text-align: center;
 }
 
@@ -99,14 +134,17 @@ ul.pager {
     margin: 0 1px;
     padding: 0;
   
-    span, 
-    a {
+    span {
       display: inline-block;
       padding: 1px 8px;
       background: #fff8dc;
       border: 1px solid #ccc;
       vertical-align: middle;
-      text-decoration: none; 
+      text-decoration: none;
+    }
+
+    a {
+      @extend span;
       &:hover {
         background: #e3e3e3;
       }
@@ -118,16 +156,29 @@ ul.pager {
 nav.global {
   @include erase_list_bullets; 
   float: right;
-  margin: auto;
+  width: $sidebar_width;
+  position: relative;
+  left: $sidebar_width;
   background-color: $sub;
+  overflow: hidden;
+
+  h4 {
+    padding: 5px;
+    line-height: 1.6;
+    color: $main_text;
+    background: lighten($main, 5%);
+  }
+
 
   li {
     @include margin_clear;
     overflow: hidden;
-    width: 100%;
-    width: 180px;
     border-top: 1px solid $sub_line;
     color: $main_text;
+
+    &:last-child {
+      border-bottom: 1px solid $sub_line;
+    }
 
     a {
       display: block;
@@ -170,7 +221,7 @@ nav.global {
 
     .current{
       @extend a;
-        background: darken($sub, 15%);
+      background: darken($sub, 15%);
     }
 
   }

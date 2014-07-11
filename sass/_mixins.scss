@@ -22,16 +22,16 @@
   padding: 0;
 }
 
-//TB用:確認用メニューを画面右、縦に並べて配置(したい)
-@mixin media_tb ($width: 768px) {
-  @media only screen and (max-width: $width) {
+//PC用:確認用メニューを画面右、縦に並べて配置(したい)
+@mixin media_tb ($width: 480px) {
+  @media only screen and (min-width: $width) {
     @content; 
   }
 }
 
-//PC用:確認用メニューをヘッダー横に配置(したい)
+//TB用:確認用メニューをヘッダー横に配置(したい)
 @mixin media_pc ($width: 768px) {
-  @media only screen and (max-width: $width) {
+  @media only screen and (min-width: $width) {
     @content; 
   }
 }
@@ -40,7 +40,7 @@
 @mixin default_fonts {
   font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, sans-serif;
 }
-//マウスオーバー時の背景色変更
+/*マウスオーバー時の背景色変更*/
 @mixin bg_color_hover ($before, $after) {
   background-color: $before;
   &:hover,

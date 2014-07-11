@@ -11,21 +11,25 @@
     <h1>フォーム>完了</h1>
   </header>
 
-  <section class="main">
-    <p>応募しました</p>
-    <a href="index.php">TOPページへ</a>
-  </section><!--main-->
-
-  <nav class="global">
-    <h4>動作確認用</h4>
-    <ul>
-      <li><a href="index.php">TOP</a></li>
-      <li><a href="form.php">入力</a></li>
-      <li><a href="confirm.php">確認</a></li>
-      <li><span class="current">完了</span></li>
-      <li><a href="list.php">応募者一覧</a></li>
-    </ul>
-  </nav>
+  <div class="container_sub">
+    <div class="container_main">
+      <section class="main">
+        <p>応募しました</p>
+        <a href="index.php">TOPページへ</a>
+      </section><!--main-->
+    
+      <nav class="global">
+        <h4>動作確認用</h4>
+        <ul>
+          <li><a href="index.php">TOP</a></li>
+          <li><a href="form.php">入力</a></li>
+          <li><a href="confirm.php">確認</a></li>
+          <li><span class="current">完了</span></li>
+          <li><a href="list.php">応募者一覧</a></li>
+        </ul>
+      </nav>
+    </div><!--container main-->
+  </div><!--container sub-->
 
   <footer>
     <p>&copy; 2014</p>

@@ -20,9 +20,6 @@ if (!empty($_SESSION['errormsg'])) {
 
 if (!empty($errormsg)) {
     $count_errormsg = count($errormsg);
-    for ($i = 0; $i < $count_errormsg; $i++) {
-        print "$errormsg[$i]<br />\n";
-    }
 }
 
 //都道府県リストをDBから取得

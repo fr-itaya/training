@@ -1,0 +1,61 @@
+/*レイアウト用*/
+//clear
+@mixin clear {
+  clear: both;
+}
+
+@mixin clearfix {
+  display: block;
+  *zoom: 1;
+  &:after {
+    content: ".";
+    display: block;
+    visibility: hidden;
+    height: 0;
+    font-size: 0;
+    clear: both;
+  }
+}
+//余白詰め
+@mixin margin-clear {
+  margin: 0;
+  padding: 0;
+}
+
+//PC用:確認用メニューを画面右、縦に並べて配置(したい)
+@mixin media-tb ($width: 480px) {
+  @media only screen and (min-width: $width) {
+    @content; 
+  }
+}
+
+//TB用:確認用メニューをヘッダー横に配置(したい)
+@mixin media-pc ($width: 768px) {
+  @media only screen and (min-width: $width) {
+    @content; 
+  }
+}
+
+/*font family*/
+@mixin default-fonts {
+  font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, sans-serif;
+}
+/*マウスオーバー時の背景色変更*/
+@mixin bg-color-hover ($before, $after) {
+  background-color: $before;
+  &:hover,
+  &:active {
+    background-color: $after;
+  }
+}
+
+//リスト先頭の点を消す、ついでに左の空白を詰める
+@mixin erase-list-bullets {
+  list-style: none;
+  padding: 0;
+  li {
+    list-style-image: none;
+    list-style-type: none;
+    margin-left: 0;
+  }
+}

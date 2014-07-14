@@ -8,5 +8,4 @@ function fetchPref($pdo) {
     $pref_array = array_merge($pref_none, $pref_rows);
     return $pref_array;
 }
-
 ?>

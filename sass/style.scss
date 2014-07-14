@@ -1,0 +1,244 @@
+@import "compass/reset";
+@import "mixins.scss";
+
+//color
+$main-color: #454545;
+$main-color-line: #AAA;
+$main-color-text: #FFFEFE;
+$sub-color: #EF7C61;
+$sub-color-line: lighten($sub-color, 10%);
+$sub-color-text: lighten($sub-color, 30%);
+$error-bgcolor: #AD4844;
+$table-header-bgcolor: #f5f5f5;
+
+//width,height
+$list-width: 100%; 
+$sidebar-width: 20%;
+$main-margin: 10px;
+$main-width: 77.5%;
+
+/*全体の文字色*/
+body {
+  @include default-fonts;
+  font-size: 16px;
+  color: #333;
+  line-height: 1.4;
+}
+
+/*ヘッダ*/
+header {
+  padding: 10px 10px;
+  font-size: 30px;
+  color: $main-color-text;
+  background-color: $main-color;
+  border-bottom: 1px solid $main-color-line;
+}
+
+/*To equal height columns without heightLine.js*/
+.container_main {
+  float: left;
+  width: 100%;
+  background: white;
+  position: relative;
+  right: 20%;
+}
+
+.container_sub {
+  float: left;
+  width: 100%;
+  background: $sub-color;
+  position: relative;
+  overflow: hidden;
+}
+/*main column*/
+
+.main {
+  margin: $main-margin;
+  float: left;
+  width: $main-width;
+  position: relative;
+  left: $sidebar-width;
+}
+
+a {
+  text-decoration: none;
+  background: lighten($sub-color, 50%);
+  border: 2px solid $sub-color;
+  padding: 1px 8px;
+  border-radius: 5px;
+  color: darken($sub-color, 15%);
+  cursor: pointer;
+}
+
+/*form*/
+
+fieldset {
+  margin-top: - $main-margin;
+  padding: 20px;
+  border: 2px dotted $main-color-line;
+  border-radius: 5px;
+  line-height: 2;
+}
+
+label {
+ font-weight: bold;
+ color: $main-color;
+}
+
+/*errormsg*/
+
+.error {
+  margin-bottom: $main-margin;
+  padding: 30px 10px;
+  color: $main-color-text;
+  background-color: $error-bgcolor;
+  border-radius: 5px;
+}
+
+/*table*/
+
+table {
+  width:300px;
+  border: 1px $main-color-line solid;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin-bottom: 10px;
+  padding: 10px;
+
+  tr {
+    border: 1px $main-color-line solid;
+    border-width: 0 1px 1px 1px;
+    
+    th {
+      border: 1px $main-color-line solid;
+      background-color: $table-header-bgcolor;
+      text-align: center;
+      font-size: 0.95em;
+    }
+    td {
+      @extend th;
+      background-color: #FFF;
+    }
+  }
+}
+
+#horizontal {
+  width: $list-width;
+  text-align: center;
+}
+
+/*pagenav*/
+
+ul.pager {
+  margin: 0 0 10px;
+  padding: 12px;
+  background: $main-color-line;
+  text-align: center;
+
+  li {
+    display: inline;
+    margin: 0 1px;
+    padding: 0;
+  
+    span {
+      display: inline-block;
+      padding: 1px 8px;
+      background: #fff8dc;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      vertical-align: middle;
+      text-decoration: none;
+    }
+
+    a {
+      @extend span;
+      &:hover {
+        color: $sub-color-text;
+        background: darken($sub-color, 10%);
+      }
+    }
+  }
+}
+
+/*sidebar*/
+nav.global {
+  @include erase-list-bullets; 
+  float: right;
+  width: $sidebar-width;
+  position: relative;
+  left: $sidebar-width;
+  background-color: $sub-color;
+  overflow: hidden;
+
+  h4 {
+    padding: 5px;
+    line-height: 1.6;
+    color: $main-color-text;
+    background: lighten($main-color, 5%);
+  }
+
+
+  li {
+    @include margin-clear;
+    overflow: hidden;
+    border-top: 1px solid $sub-color-line;
+    color: $main-color-text;
+
+    &:last-child {
+      border-bottom: 1px solid $sub-color-line;
+    }
+
+    a {
+      display: block;
+      position: relative;
+      z-index: 10;
+      height: 40px;
+      margin: 0;
+      padding: 0 10px 0 50px;
+      background-color: $sub-color;
+      color: $sub-color-text;
+      font-size: 14px;
+      line-height: 40px;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 0;
+  
+      &:before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 25px;
+        width: 8px;
+        height: 8px;
+        margin-top: -4px;
+        border-radius: 50%;
+        background: lighten($sub-color, 50%);
+        transition: 0.1s;
+      }
+      
+      &:hover {
+        background: darken($sub-color, 15%); 
+      }
+  
+      &:hover:before {
+        left: -16px;
+        width: 50px;
+        height: 50px;
+        margin-top: -25px;
+      }
+    }
+
+    .current{
+      @extend a;
+      background: darken($sub-color, 15%);
+    }
+
+  }
+}
+
+footer {
+  @include clear;
+  padding:10px;
+  color: $main-color-text;
+  background-color: lighten($main-color, 30%);
+}

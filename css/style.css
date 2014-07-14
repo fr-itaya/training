@@ -118,12 +118,17 @@ header {
 
 /* line 62, ../sass/style.scss */
 a, nav.global li .current {
-  display: block;
+  text-decoration: none;
+  background: white;
+  border: 2px solid #ef7c61;
+  padding: 1px 8px;
+  border-radius: 5px;
   color: #e8421c;
+  cursor: pointer;
 }
 
 /*form*/
-/* line 69, ../sass/style.scss */
+/* line 74, ../sass/style.scss */
 fieldset {
   margin-top: -10px;
   padding: 20px;
@@ -132,14 +137,14 @@ fieldset {
   line-height: 2;
 }
 
-/* line 77, ../sass/style.scss */
+/* line 82, ../sass/style.scss */
 label {
   font-weight: bold;
   color: #454545;
 }
 
 /*errormsg*/
-/* line 84, ../sass/style.scss */
+/* line 89, ../sass/style.scss */
 .error {
   margin-bottom: 10px;
   padding: 30px 10px;
@@ -149,7 +154,7 @@ label {
 }
 
 /*table*/
-/* line 94, ../sass/style.scss */
+/* line 99, ../sass/style.scss */
 table {
   width: 300px;
   border: 1px #e3e3e3 solid;
@@ -158,44 +163,44 @@ table {
   margin-bottom: 10px;
   padding: 10px;
 }
-/* line 102, ../sass/style.scss */
+/* line 107, ../sass/style.scss */
 table tr {
   border: 1px #e3e3e3 solid;
   border-width: 0 1px 1px 1px;
 }
-/* line 106, ../sass/style.scss */
+/* line 111, ../sass/style.scss */
 table tr th, table tr td {
   border: 1px #e3e3e3 solid;
   background-color: #f5f5f5;
   text-align: center;
   font-size: 0.95em;
 }
-/* line 112, ../sass/style.scss */
+/* line 117, ../sass/style.scss */
 table tr td {
   background-color: #FFF;
 }
 
-/* line 119, ../sass/style.scss */
+/* line 124, ../sass/style.scss */
 #horizontal {
   width: 100%;
   text-align: center;
 }
 
 /*pagenav*/
-/* line 126, ../sass/style.scss */
+/* line 131, ../sass/style.scss */
 ul.pager {
   margin: 0 0 10px;
   padding: 12px;
   background: #f3f3f3;
   text-align: center;
 }
-/* line 132, ../sass/style.scss */
+/* line 137, ../sass/style.scss */
 ul.pager li {
   display: inline;
   margin: 0 1px;
   padding: 0;
 }
-/* line 137, ../sass/style.scss */
+/* line 142, ../sass/style.scss */
 ul.pager li span, ul.pager li a, ul.pager nav.global li .current, nav.global ul.pager li .current {
   display: inline-block;
   padding: 1px 8px;
@@ -204,13 +209,13 @@ ul.pager li span, ul.pager li a, ul.pager nav.global li .current, nav.global ul.
   vertical-align: middle;
   text-decoration: none;
 }
-/* line 148, ../sass/style.scss */
+/* line 153, ../sass/style.scss */
 ul.pager li a:hover, ul.pager nav.global li .current:hover, nav.global ul.pager li .current:hover {
   background: #e3e3e3;
 }
 
 /*sidebar*/
-/* line 156, ../sass/style.scss */
+/* line 161, ../sass/style.scss */
 nav.global {
   list-style: none;
   padding: 0;
@@ -227,14 +232,14 @@ nav.global li {
   list-style-type: none;
   margin-left: 0;
 }
-/* line 165, ../sass/style.scss */
+/* line 170, ../sass/style.scss */
 nav.global h4 {
   padding: 5px;
   line-height: 1.6;
   color: #fffefe;
   background: #525252;
 }
-/* line 173, ../sass/style.scss */
+/* line 178, ../sass/style.scss */
 nav.global li {
   margin: 0;
   padding: 0;
@@ -242,11 +247,11 @@ nav.global li {
   border-top: 1px solid #f4a28f;
   color: #fffefe;
 }
-/* line 179, ../sass/style.scss */
+/* line 184, ../sass/style.scss */
 nav.global li:last-child {
   border-bottom: 1px solid #f4a28f;
 }
-/* line 183, ../sass/style.scss */
+/* line 188, ../sass/style.scss */
 nav.global li a, nav.global li .current {
   display: block;
   position: relative;
@@ -260,8 +265,9 @@ nav.global li a, nav.global li .current {
   line-height: 40px;
   font-weight: bold;
   text-decoration: none;
+  border-radius: 0;
 }
-/* line 197, ../sass/style.scss */
+/* line 203, ../sass/style.scss */
 nav.global li a:before, nav.global li .current:before {
   content: "";
   position: absolute;
@@ -274,23 +280,23 @@ nav.global li a:before, nav.global li .current:before {
   background: white;
   transition: 0.1s;
 }
-/* line 210, ../sass/style.scss */
+/* line 216, ../sass/style.scss */
 nav.global li a:hover, nav.global li .current:hover {
   background: #e8421c;
 }
-/* line 214, ../sass/style.scss */
+/* line 220, ../sass/style.scss */
 nav.global li a:hover:before, nav.global li .current:hover:before {
   left: -16px;
   width: 50px;
   height: 50px;
   margin-top: -25px;
 }
-/* line 222, ../sass/style.scss */
+/* line 228, ../sass/style.scss */
 nav.global li .current {
   background: #e8421c;
 }
 
-/* line 230, ../sass/style.scss */
+/* line 236, ../sass/style.scss */
 footer {
   clear: both;
   padding: 10px;

@@ -60,8 +60,13 @@ header {
 }
 
 a {
-  display: block;
+  text-decoration: none;
+  background: lighten($sub, 50%);
+  border: 2px solid $sub;
+  padding: 1px 8px;
+  border-radius: 5px;
   color: darken($sub, 15%);
+  cursor: pointer;
 }
 
 /*form*/
@@ -193,6 +198,7 @@ nav.global {
       line-height: 40px;
       font-weight: bold;
       text-decoration: none;
+      border-radius: 0;
   
       &:before {
         content: "";

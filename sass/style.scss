@@ -2,23 +2,24 @@
 @import "mixins.scss";
 
 //color
-$main: #454545;
-$main_line: #AAA;
-$main_text: #FFFEFE;
-$sub: #EF7C61;
-$sub_line: lighten($sub, 10%);
-$sub_text: lighten($sub, 25%);
-$error_bg: #AD4844;
+$main-color: #454545;
+$main-color-line: #AAA;
+$main-color-text: #FFFEFE;
+$sub-color: #EF7C61;
+$sub-color-line: lighten($sub-color, 10%);
+$sub-color-text: lighten($sub-color, 30%);
+$error-bgcolor: #AD4844;
+$table-header-bgcolor: #f5f5f5;
 
 //width,height
-$list_width: 100%; 
-$sidebar_width: 20%;
-$main_margin: 10px;
-$main_width: 77.5%;
+$list-width: 100%; 
+$sidebar-width: 20%;
+$main-margin: 10px;
+$main-width: 77.5%;
 
 /*全体の文字色*/
 body {
-  @include default_fonts;
+  @include default-fonts;
   font-size: 16px;
   color: #333;
   line-height: 1.4;
@@ -28,9 +29,9 @@ body {
 header {
   padding: 10px 10px;
   font-size: 30px;
-  color: $main_text;
-  background-color: $main;
-  border-bottom: 1px solid $main_line;
+  color: $main-color-text;
+  background-color: $main-color;
+  border-bottom: 1px solid $main-color-line;
 }
 
 /*To equal height columns without heightLine.js*/
@@ -45,52 +46,52 @@ header {
 .container_sub {
   float: left;
   width: 100%;
-  background: $sub;
+  background: $sub-color;
   position: relative;
   overflow: hidden;
 }
 /*main column*/
 
 .main {
-  margin: $main_margin;
+  margin: $main-margin;
   float: left;
-  width: $main_width;
+  width: $main-width;
   position: relative;
-  left: $sidebar_width;
+  left: $sidebar-width;
 }
 
 a {
   text-decoration: none;
-  background: lighten($sub, 50%);
-  border: 2px solid $sub;
+  background: lighten($sub-color, 50%);
+  border: 2px solid $sub-color;
   padding: 1px 8px;
   border-radius: 5px;
-  color: darken($sub, 15%);
+  color: darken($sub-color, 15%);
   cursor: pointer;
 }
 
 /*form*/
 
 fieldset {
-  margin-top: - $main_margin;
+  margin-top: - $main-margin;
   padding: 20px;
-  border: 2px double $main_line;
+  border: 2px dotted $main-color-line;
   border-radius: 5px;
   line-height: 2;
 }
 
 label {
  font-weight: bold;
- color: $main;
+ color: $main-color;
 }
 
 /*errormsg*/
 
 .error {
-  margin-bottom: $main_margin;
+  margin-bottom: $main-margin;
   padding: 30px 10px;
-  color: $main_text;
-  background-color: $error_bg;
+  color: $main-color-text;
+  background-color: $error-bgcolor;
   border-radius: 5px;
 }
 
@@ -98,19 +99,19 @@ label {
 
 table {
   width:300px;
-  border: 1px #e3e3e3 solid;
+  border: 1px $main-color-line solid;
   border-collapse: collapse;
   border-spacing: 0;
   margin-bottom: 10px;
   padding: 10px;
 
-tr {
-    border: 1px #e3e3e3 solid;
+  tr {
+    border: 1px $main-color-line solid;
     border-width: 0 1px 1px 1px;
-  
+    
     th {
-      border: 1px #e3e3e3 solid;
-      background-color: #f5f5f5;
+      border: 1px $main-color-line solid;
+      background-color: $table-header-bgcolor;
       text-align: center;
       font-size: 0.95em;
     }
@@ -122,7 +123,7 @@ tr {
 }
 
 #horizontal {
-  width: $list_width;
+  width: $list-width;
   text-align: center;
 }
 
@@ -131,7 +132,7 @@ tr {
 ul.pager {
   margin: 0 0 10px;
   padding: 12px;
-  background: #f3f3f3;
+  background: $main-color-line;
   text-align: center;
 
   li {
@@ -144,6 +145,7 @@ ul.pager {
       padding: 1px 8px;
       background: #fff8dc;
       border: 1px solid #ccc;
+      border-radius: 5px;
       vertical-align: middle;
       text-decoration: none;
     }
@@ -151,7 +153,8 @@ ul.pager {
     a {
       @extend span;
       &:hover {
-        background: #e3e3e3;
+        color: $sub-color-text;
+        background: darken($sub-color, 10%);
       }
     }
   }
@@ -159,30 +162,30 @@ ul.pager {
 
 /*sidebar*/
 nav.global {
-  @include erase_list_bullets; 
+  @include erase-list-bullets; 
   float: right;
-  width: $sidebar_width;
+  width: $sidebar-width;
   position: relative;
-  left: $sidebar_width;
-  background-color: $sub;
+  left: $sidebar-width;
+  background-color: $sub-color;
   overflow: hidden;
 
   h4 {
     padding: 5px;
     line-height: 1.6;
-    color: $main_text;
-    background: lighten($main, 5%);
+    color: $main-color-text;
+    background: lighten($main-color, 5%);
   }
 
 
   li {
-    @include margin_clear;
+    @include margin-clear;
     overflow: hidden;
-    border-top: 1px solid $sub_line;
-    color: $main_text;
+    border-top: 1px solid $sub-color-line;
+    color: $main-color-text;
 
     &:last-child {
-      border-bottom: 1px solid $sub_line;
+      border-bottom: 1px solid $sub-color-line;
     }
 
     a {
@@ -192,8 +195,8 @@ nav.global {
       height: 40px;
       margin: 0;
       padding: 0 10px 0 50px;
-      background-color: $sub;
-      color: $sub_text;
+      background-color: $sub-color;
+      color: $sub-color-text;
       font-size: 14px;
       line-height: 40px;
       font-weight: bold;
@@ -209,12 +212,12 @@ nav.global {
         height: 8px;
         margin-top: -4px;
         border-radius: 50%;
-        background: lighten($sub, 50%);
+        background: lighten($sub-color, 50%);
         transition: 0.1s;
       }
       
       &:hover {
-        background: darken($sub, 15%); 
+        background: darken($sub-color, 15%); 
       }
   
       &:hover:before {
@@ -227,15 +230,15 @@ nav.global {
 
     .current{
       @extend a;
-      background: darken($sub, 15%);
+      background: darken($sub-color, 15%);
     }
 
   }
 }
 
 footer {
-   @include clear;
-   padding:10px;
-   color: $main_text;
-   background-color: lighten($main, 30%);
+  @include clear;
+  padding:10px;
+  color: $main-color-text;
+  background-color: lighten($main-color, 30%);
 }

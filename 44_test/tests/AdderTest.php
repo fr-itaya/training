@@ -1,7 +1,4 @@
 <?php
-require_once 'PHPUnit/Framework.php';
-require_once '../adder.php';
-
 class AdderTest extends PHPUnit_Framework_TestCase
 {
     /**
@@ -17,7 +14,7 @@ class AdderTest extends PHPUnit_Framework_TestCase
         return array(
             array(1, 2, 3),
             array(1, -2, -1),
-            array(1, 1.5, 2.5),
+            array(1, 1.5, 2.5)
         );
     }
 }

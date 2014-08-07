@@ -1,11 +1,22 @@
 <?php
+require_once __DIR__ . '/../adder.php';
+
 class AdderTest extends PHPUnit_Framework_TestCase
 {
+    public $adder;
+
+    public function setUp()
+    {
+        $this->adder = new Adder;
+    }
+
     /**
      * @dataProvider adderProvider
      */
-    public function testAdder($x, $y, $expected)
+
+    public function testAdd($x, $y, $expected)
     {
+        $this->adder->add($x, $y);
         $this->assertEquals($expected, $x + $y);
     }
 

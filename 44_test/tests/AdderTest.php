@@ -13,7 +13,6 @@ class AdderTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider adderProvider
      */
-
     public function testAdd($x, $y, $expected)
     {
         $this->assertEquals($expected, $this->adder->add($x, $y));
